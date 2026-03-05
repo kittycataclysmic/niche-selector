@@ -357,40 +357,29 @@ async function fetchBrandStatement(ans, primary, secondary) {
     const a = ans[key];
     return a !== undefined ? (q.opts[a]?.t ?? "varied background") : "varied background";
   };
-  const n1 = NICHES[primary], n2 = NICHES[secondary];
+
+  const n1 = NICHES[primary];
+  const n2 = NICHES[secondary];
+
   const prompt = `Write a professional VA Brand Statement for a Filipino Virtual Assistant. Output exactly 2 sentences — nothing more.
+  Primary niche: ${n1.label}. Secondary niche: ${n2.label}. 
+  Background: ${get(0,"q01")}. Experience: ${get(1,"q02")}. 
+  Strength: ${get(11,"q12")}. Target market: ${get(6,"q07")}.
+  Rules: Exactly 2 sentences. No "I am". No clichés. Sound confident and specific.`;
 
-Their niche diagnostic results:
-- Primary niche: ${n1.label}
-- Secondary niche: ${n2.label}
-- Educational background: ${get(0,"q01")}
-- Most recent experience: ${get(1,"q02")}
-- Enjoys most: ${get(2,"q03")}
-- Tools used: ${get(3,"q04")}
-- Work style: ${get(5,"q06")}
-- Target market: ${get(6,"q07")}
-- English confidence: ${get(7,"q08")}
-- Biggest strength: ${get(11,"q12")}
+  const res = await fetch("/api/generate", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ prompt: prompt }), 
+  });
 
-Brand Statement rules:
-1. Exactly 2 sentences. No more.
-2. Sentence 1: Position as a ${n1.label} specialist. Name 1–2 specific deliverables or tools. State concrete client value.
-3. Sentence 2: Reference one transferable strength from their background. Mention the target client market.
-4. DO NOT start with "I". NO clichés: hardworking, passionate, detail-oriented, fast learner.
-5. Sound like a real person — confident, specific, zero filler.
-6. Output ONLY the brand statement. No preamble, no quotes, no explanation.`;
+  if (!res.ok) {
+    throw new Error("M&M Engine Failure");
+  }
 
-// This now points to your secure Vercel function
-    const res = await fetch("/api/generate", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ prompt: prompt }), 
-    });
-
-    if (!res.ok) throw new Error("M&M Engine Failure");
-
-    const data = await res.json();
-    return data.text.trim(); // Return the clean text from your proxy
+  const data = await res.json();
+  return data.text.trim(); 
+}
 
 // ─────────────────────────────────────────────────────────
 //  WHY THIS NICHE
