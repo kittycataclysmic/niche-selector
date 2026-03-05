@@ -380,15 +380,17 @@ Brand Statement rules:
 5. Sound like a real person — confident, specific, zero filler.
 6. Output ONLY the brand statement. No preamble, no quotes, no explanation.`;
 
-  const res = await fetch("https://api.anthropic.com/v1/messages", {
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify({ model:"claude-sonnet-4-20250514", max_tokens:200, messages:[{role:"user",content:prompt}] }),
-  });
-  const data = await res.json();
-  if (data.content?.[0]?.text) return data.content[0].text.trim();
-  throw new Error("No content");
-}
+// This now points to your secure Vercel function
+    const res = await fetch("/api/generate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ prompt: prompt }), 
+    });
+
+    if (!res.ok) throw new Error("M&M Engine Failure");
+
+    const data = await res.json();
+    return data.text.trim(); // Return the clean text from your proxy
 
 // ─────────────────────────────────────────────────────────
 //  WHY THIS NICHE
