@@ -1,5 +1,5 @@
 export default async function handler(req, res) {
-  // 1. Only allow POST (Security)
+  // Security: Only allow POST requests
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -11,7 +11,7 @@ export default async function handler(req, res) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "x-api-key": process.env.ANTHROPIC_API_KEY, // The "Fuel" from Vercel Settings
+        "x-api-key": process.env.ANTHROPIC_API_KEY, 
         "anthropic-version": "2023-06-01"
       },
       body: JSON.stringify({
@@ -23,7 +23,6 @@ export default async function handler(req, res) {
 
     const data = await response.json();
     
-    // Send the AI's answer back to your React app
     if (data.content && data.content[0]) {
       return res.status(200).json({ text: data.content[0].text });
     } else {
