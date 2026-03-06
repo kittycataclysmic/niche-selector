@@ -109,6 +109,9 @@ const CSS = `
   }
 `;
 
+// ─────────────────────────────────────────────────────────
+//  11 NICHES
+// ─────────────────────────────────────────────────────────
 const NICHES = {
   ecom:    { label:"eCommerce VA",             icon:"🛒", php:"₱25K–₱45K/mo", usd:"$8–$15/hr",  tier2:"₱35K–₱55K/mo", demand:"Very High", tools:["Shopify","Klaviyo","Gorgias","Google Sheets","Canva"] },
   social:  { label:"Social Media VA",          icon:"📱", php:"₱22K–₱40K/mo", usd:"$7–$14/hr",  tier2:"₱32K–₱52K/mo", demand:"Very High", tools:["Canva","Meta Business Suite","Buffer","Later","CapCut"] },
@@ -124,15 +127,18 @@ const NICHES = {
   pm:      { label:"Project Management VA",    icon:"🗂️", php:"₱30K–₱55K/mo", usd:"$10–$20/hr", tier2:"₱45K–₱70K/mo", demand:"Growing",   tools:["Asana","ClickUp","Monday.com","Notion","Slack"] },
 };
 
+// ─────────────────────────────────────────────────────────
+//  12 QUESTIONS
+// ─────────────────────────────────────────────────────────
 const QS = [
   {
     id:"q01", n:1, multi:false,
     text:"What is your educational background?",
     sub:"Your field of study reveals transferable skills — even if it seems unrelated to VA work.",
     opts:[
-      { t:"Business, Commerce, or Management",            s:{exec:2,books:2,ecom:1} },
+      { t:"Business, Commerce, or Management",           s:{exec:2,books:2,ecom:1} },
       { t:"Communications, Journalism, or Marketing",    s:{social:3,content:2,cx:1} },
-      { t:"IT, Computer Science, or Engineering",         s:{ecom:2,exec:1,books:1,media:1} },
+      { t:"IT, Computer Science, or Engineering",        s:{ecom:2,exec:1,books:1,media:1} },
       { t:"Education, Humanities, or Liberal Arts",      s:{content:2,cx:2,social:1,edu:2} },
       { t:"Finance, Accounting, or Economics",           s:{books:3,realty:2,exec:1} },
       { t:"Real Estate, Law, or Property-related",       s:{realty:3,legal:2,exec:1} },
@@ -165,7 +171,7 @@ const QS = [
     text:"Which tasks do you genuinely enjoy most?",
     sub:"Be honest — your natural enjoyment is a stronger signal than what you think you should pick.",
     opts:[
-      { t:"Organising calendars, inboxes, and schedules",          s:{exec:3,books:1} },
+      { t:"Organizing calendars, inboxes, and schedules",          s:{exec:3,books:1} },
       { t:"Creating graphics, captions, and visual content",       s:{social:3,content:1} },
       { t:"Writing articles, blog posts, or persuasive copy",      s:{content:3,social:1,media:1} },
       { t:"Tracking numbers, formulas, and spreadsheets",          s:{books:3,realty:1,ecom:1} },
@@ -173,7 +179,7 @@ const QS = [
       { t:"Helping people and resolving complaints",               s:{cx:3,exec:1,health:1} },
       { t:"Managing online stores, listings, and product data",    s:{ecom:3,social:1} },
       { t:"Editing videos, audio, or multimedia content",          s:{media:3,social:2} },
-      { t:"Supporting students or managing course content",         s:{edu:3,content:1} },
+      { t:"Supporting students or managing course content",        s:{edu:3,content:1} },
     ],
   },
   {
@@ -181,25 +187,25 @@ const QS = [
     text:"Which tools have you used — even briefly?",
     sub:"Select all that apply. Any exposure counts — the practice kits will build the rest from scratch.",
     opts:[
-      { t:"Google Workspace",           sub:"Docs, Sheets, Gmail, Calendar",                   s:{exec:2,books:1,content:1} },
+      { t:"Google Workspace",           sub:"Docs, Sheets, Gmail, Calendar",                  s:{exec:2,books:1,content:1} },
       { t:"Canva or Adobe Photoshop",   sub:"Any design or image editing tool",               s:{social:3,content:2,media:1} },
       { t:"Shopify / Lazada / Shopee",  sub:"Any online store or marketplace platform",       s:{ecom:3,cx:1} },
       { t:"QuickBooks or Xero",         sub:"Any financial tracking or accounting tool",      s:{books:3,realty:1} },
       { t:"HubSpot / Salesforce / CRM", sub:"Any customer relationship management tool",     s:{realty:2,cx:2,exec:1} },
-      { t:"Facebook / Instagram / TikTok", sub:"Managing brand pages or ad accounts",         s:{social:3,cx:1} },
-      { t:"Notion / Trello / Asana",    sub:"Any project management or ops tool",             s:{exec:2,content:1,ecom:1,edu:1} },
-      { t:"WordPress or Wix",           sub:"Any website builder or CMS",                     s:{content:3,social:1,media:1} },
+      { t:"Facebook / Instagram / TikTok", sub:"Managing brand pages or ad accounts",        s:{social:3,cx:1} },
+      { t:"Notion / Trello / Asana",    sub:"Any project management or ops tool",            s:{exec:2,content:1,ecom:1,edu:1} },
+      { t:"WordPress or Wix",           sub:"Any website builder or CMS",                    s:{content:3,social:1,media:1} },
       { t:"Zoom or Calendly",           sub:"Any scheduling or video conferencing tool",      s:{exec:2,health:2,edu:2} },
       { t:"Mailchimp / ActiveCampaign", sub:"Any email marketing or automation platform",    s:{social:2,ecom:2,content:1} },
       { t:"CapCut or Adobe Premiere",   sub:"Any video editing tool",                        s:{media:3,social:2} },
-      { t:"Zendesk / Freshdesk / Gorgias", sub:"Any helpdesk or ticketing tool",             s:{cx:3,ecom:1} },
+      { t:"Zendesk / Freshdesk / Gorgias", sub:"Any helpdesk or ticketing tool",            s:{cx:3,ecom:1} },
       { t:"LinkedIn",                   sub:"Recruiting, outreach, or personal branding",    s:{exec:2,legal:1,social:1} },
-      { t:"EMR or medical scheduling",  sub:"Any electronic health records system",           s:{health:4} },
-      { t:"Clio or MyCase",             sub:"Any legal case management tool",                 s:{legal:4} },
+      { t:"EMR or medical scheduling",  sub:"Any electronic health records system",          s:{health:4} },
+      { t:"Clio or MyCase",             sub:"Any legal case management tool",                s:{legal:4} },
       { t:"Kajabi / Teachable / Thinkific", sub:"Any online course or LMS platform",        s:{edu:4,content:1} },
-      { t:"Airtable or Monday.com",     sub:"Any database or advanced ops tool",              s:{exec:2,books:1,ecom:1} },
-      { t:"ChatGPT or Jasper",          sub:"Any AI writing or automation tool",              s:{content:2,social:1,media:1,edu:1} },
-      { t:"Descript or Audacity",       sub:"Any podcast or audio editing tool",              s:{media:4} },
+      { t:"Airtable or Monday.com",     sub:"Any database or advanced ops tool",             s:{exec:2,books:1,ecom:1} },
+      { t:"ChatGPT or Jasper",          sub:"Any AI writing or automation tool",             s:{content:2,social:1,media:1,edu:1} },
+      { t:"Descript or Audacity",       sub:"Any podcast or audio editing tool",             s:{media:4} },
     ],
   },
   {
@@ -219,7 +225,7 @@ const QS = [
     sub:"There is no right answer — this is about what you can sustain for years, not just weeks.",
     opts:[
       { t:"Deep focus — best work on one task for hours",    s:{content:2,books:2,legal:2} },
-      { t:"Multi-tasking — thriving while juggling things",  s:{exec:2,cx:2,health:1} },
+      { t:"Multi-tasking — you thrive when juggling multiple priorities at once",  s:{exec:2,cx:2,health:1} },
       { t:"Creative output — making things people can see",  s:{social:2,ecom:1,content:1,media:2} },
       { t:"Systems thinking — building processes and SOPs",  s:{exec:2,books:1,realty:1,edu:1} },
       { t:"Research-driven — digging for data and insights", s:{realty:2,books:2,ecom:1,legal:2} },
@@ -243,7 +249,7 @@ const QS = [
     text:"How confident are you in your written English?",
     sub:"This directly determines which niches and clients are accessible right now.",
     opts:[
-      { t:"Excellent — written reports, articles, or professional emails before", s:{content:3,exec:2,realty:1,legal:2} },
+      { t:"Excellent — I've written reports, articles, or professional emails professionally", s:{content:3,exec:2,realty:1,legal:2} },
       { t:"Good — I write clear, professional English comfortably",               s:{cx:2,exec:2,social:1,ecom:1,health:1} },
       { t:"Average — I communicate fine but prefer less writing",                 s:{books:1,ecom:1} },
       { t:"Still improving — writing in English feels challenging",               s:{ecom:1,books:1} },
@@ -256,7 +262,7 @@ const QS = [
     opts:[
       { t:"Very comfortable — spreadsheets and formulas are satisfying",  s:{books:3,realty:2,ecom:1} },
       { t:"Comfortable — basic math and Excel formulas are no problem",   s:{ecom:2,realty:1,exec:1} },
-      { t:"Neutral — I can do it but it is not my preference",            s:{social:1,cx:1,media:1} },
+      { t:"Neutral — I can do it, but it is not my preference",            s:{social:1,cx:1,media:1} },
       { t:"Prefer to avoid — numbers genuinely stress me out",            s:{content:1,social:1,edu:1} },
     ],
   },
@@ -280,10 +286,10 @@ const QS = [
       { t:"Fitness, wellness coaching, or nutrition brands",             s:{content:2,social:2} },
       { t:"Recruitment, HR, or staffing agencies",                      s:{exec:2,cx:2} },
       { t:"Insurance agencies or risk management firms",                 s:{books:2,exec:2} },
-      { t:"Travel, tourism, or hospitality brands",                      s:{cx:2,social:2} },
+      { t:"Travel, tourism, or hospitality brands",                     s:{cx:2,social:2} },
       { t:"Events management, weddings, or entertainment",              s:{exec:2,social:2,media:1} },
-      { t:"Non-profit organizations or NGOs",                            s:{exec:2,content:2} },
-      { t:"Construction, architecture, or property development",         s:{realty:2,exec:2} },
+      { t:"Non-profit organizations or NGOs",                           s:{exec:2,content:2} },
+      { t:"Construction, architecture, or property development",        s:{realty:2,exec:2} },
       { t:"Logistics, supply chain, or freight forwarding",             s:{exec:2,books:2} },
     ],
   },
@@ -317,7 +323,7 @@ const QS = [
 const TOTAL = QS.length;
 
 // ─────────────────────────────────────────────────────────
-//  UTILITIES
+//  SCORING ENGINE — handles both single and multi-select
 // ─────────────────────────────────────────────────────────
 function computeScores(ans) {
   const s = { ecom:0,social:0,exec:0,content:0,realty:0,books:0,cx:0,health:0,legal:0,edu:0,media:0 };
@@ -338,16 +344,9 @@ function computeScores(ans) {
   return { raw:s, sorted, primary:sorted[0][0], secondary:sorted[1][0] };
 }
 
-// FALLBACK GENERATOR: Used if the AI API is down
-function generateFallbackStatement(ans, pKey, sKey) {
-  const p = NICHES[pKey].label;
-  const s = NICHES[sKey].label;
-  const strength = QS[11].opts[ans.q12]?.t.toLowerCase().split(' — ')[0] || "reliability";
-  const market = QS[6].opts[ans.q07]?.t.split(' — ')[0] || "global businesses";
-  
-  return `Specializing as a ${p} with secondary expertise in ${s}, I help ${market} optimize their operations through ${strength}. I am committed to delivering high-level support that enables business owners to step away from daily tasks and focus on sustainable growth.`;
-}
-
+// ─────────────────────────────────────────────────────────
+//  AI BRAND STATEMENT
+// ─────────────────────────────────────────────────────────
 async function fetchBrandStatement(ans, primary, secondary) {
   const get = (qIdx, key) => {
     const q = QS[qIdx];
@@ -358,28 +357,42 @@ async function fetchBrandStatement(ans, primary, secondary) {
     const a = ans[key];
     return a !== undefined ? (q.opts[a]?.t ?? "varied background") : "varied background";
   };
+  const n1 = NICHES[primary], n2 = NICHES[secondary];
+  const prompt = `Write a professional VA Brand Statement for a Filipino Virtual Assistant. Output exactly 2 sentences — nothing more.
 
-  const n1 = NICHES[primary];
-  const n2 = NICHES[secondary];
+Their niche diagnostic results:
+- Primary niche: ${n1.label}
+- Secondary niche: ${n2.label}
+- Educational background: ${get(0,"q01")}
+- Most recent experience: ${get(1,"q02")}
+- Enjoys most: ${get(2,"q03")}
+- Tools used: ${get(3,"q04")}
+- Work style: ${get(5,"q06")}
+- Target market: ${get(6,"q07")}
+- English confidence: ${get(7,"q08")}
+- Biggest strength: ${get(11,"q12")}
 
-  const prompt = `Write a professional VA Brand Statement for a Filipino Virtual Assistant. Output exactly 2 sentences.
-  Primary niche: ${n1.label}. Secondary niche: ${n2.label}. 
-  Background: ${get(0,"q01")}. Experience: ${get(1,"q02")}. 
-  Strength: ${get(11,"q12")}. Target market: ${get(6,"q07")}.
-  Rules: Exactly 2 sentences. No "I am". No clichés. Sound confident and specific.`;
+Brand Statement rules:
+1. Exactly 2 sentences. No more.
+2. Sentence 1: Position as a ${n1.label} specialist. Name 1–2 specific deliverables or tools. State concrete client value.
+3. Sentence 2: Reference one transferable strength from their background. Mention the target client market.
+4. DO NOT start with "I". NO clichés: hardworking, passionate, detail-oriented, fast learner.
+5. Sound like a real person — confident, specific, zero filler.
+6. Output ONLY the brand statement. No preamble, no quotes, no explanation.`;
 
-  const res = await fetch("/api/generate", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ prompt: prompt }), 
+  const res = await fetch("https://api.anthropic.com/v1/messages", {
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({ model:"claude-sonnet-4-20250514", max_tokens:200, messages:[{role:"user",content:prompt}] }),
   });
-
-  if (!res.ok) throw new Error("API Failure");
-
   const data = await res.json();
-  return data.text.trim(); 
+  if (data.content?.[0]?.text) return data.content[0].text.trim();
+  throw new Error("No content");
 }
 
+// ─────────────────────────────────────────────────────────
+//  WHY THIS NICHE
+// ─────────────────────────────────────────────────────────
 function buildReasons(ans, primary) {
   const n = NICHES[primary], r = [];
   const q03 = ans.q03 !== undefined ? QS[2].opts[ans.q03]?.t : null;
@@ -389,7 +402,7 @@ function buildReasons(ans, primary) {
   const q06 = ans.q06 !== undefined ? QS[5].opts[ans.q06]?.t : null;
   const q04 = (ans.q04 || []).length > 0 ? `${(ans.q04 || []).length} relevant tool${(ans.q04||[]).length>1?"s":""}` : null;
   if (q10) r.push(`You chose "${q10.toLowerCase()}" as your preferred industry — a direct match for this niche.`);
-  if (q03) r.push(`Your favourite tasks ("${q03.toLowerCase()}") are the core deliverables ${n.label}s are hired to do.`);
+  if (q03) r.push(`Your favorite tasks ("${q03.toLowerCase()}") are the core deliverables ${n.label}s are hired to do.`);
   if (q02 && !q02.includes("Fresh grad")) r.push(`Your background in "${q02.toLowerCase()}" gives you transferable credibility most beginners are still building.`);
   if (q12) r.push(`Your top strength — "${q12.toLowerCase()}" — is exactly what ${n.label} clients pay a premium for.`);
   if (q04 && r.length < 3) r.push(`You already have exposure to ${q04} in this space — a head start over most applicants.`);
@@ -398,13 +411,13 @@ function buildReasons(ans, primary) {
 }
 
 // ─────────────────────────────────────────────────────────
-//  MAIN COMPONENT
+//  MAIN APP
 // ─────────────────────────────────────────────────────────
 export default function NicheSelector() {
   const [phase, setPhase]   = useState("landing");
   const [qi, setQi]         = useState(0);
   const [ans, setAns]       = useState({});
-  const [sel, setSel]       = useState(null);
+  const [sel, setSel]       = useState(null);   // number | number[] | null
   const [result, setResult] = useState(null);
   const [brand, setBrand]   = useState("");
   const [bLoad, setBLoad]   = useState(false);
@@ -425,7 +438,9 @@ export default function NicheSelector() {
         const arr = Array.isArray(prev) ? prev : [];
         return arr.includes(i) ? arr.filter(x => x !== i) : [...arr, i];
       });
-    } else { setSel(i); }
+    } else {
+      setSel(i);
+    }
   };
 
   const isSelected = (i) => q.multi ? (Array.isArray(sel) && sel.includes(i)) : sel === i;
@@ -444,38 +459,29 @@ export default function NicheSelector() {
     } else {
       setPhase("calc");
       const r = computeScores(newAns);
-      setTimeout(() => { setResult(r); setPhase("gate"); }, 2200);
+      setTimeout(() => {
+        setResult(r);
+        setPhase("gate");
+      }, 2200);
     }
   };
 
   const submitGate = async () => {
-    if (!email.includes("@")) { setEmailErr(true); return; }
+    const emailRegex = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(email.trim())) { setEmailErr(true); return; }
     setEmailErr(false);
-    
-    // Attempt kit.com submission
     try {
       const fd = new FormData();
       fd.append("email_address", email);
       fd.append("fields[source]", "niche-selector");
       await fetch("https://app.kit.com/forms/9147039/subscriptions", { method:"POST", body:fd });
     } catch(_) {}
-
     setPhase("results");
-    
     if (result) {
       setBLoad(true); setBrand(""); setBErr(false);
-      try {
-        const aiResponse = await fetchBrandStatement(ans, result.primary, result.secondary);
-        // Remove common AI formatting hallucinations
-        const cleanBrand = aiResponse.replace(/^(Sentence \d: |AI: |Result: |Brand Statement: )/gi, "");
-        setBrand(cleanBrand);
-      } catch (err) {
-        console.warn("AI Engine failed, using fallback template.");
-        const fallback = generateFallbackStatement(ans, result.primary, result.secondary);
-        setBrand(fallback);
-      } finally {
-        setBLoad(false);
-      }
+      fetchBrandStatement(ans, result.primary, result.secondary)
+        .then(s => { setBrand(s); setBLoad(false); })
+        .catch(() => { setBErr(true); setBLoad(false); });
     }
   };
 
@@ -492,15 +498,8 @@ export default function NicheSelector() {
     if (!result) return;
     setBLoad(true); setBrand(""); setBErr(false);
     fetchBrandStatement(ans, result.primary, result.secondary)
-      .then(s => { 
-        const clean = s.replace(/^(Sentence \d: |AI: |Result: |Brand Statement: )/gi, "");
-        setBrand(clean); 
-        setBLoad(false); 
-      })
-      .catch(() => {
-        setBrand(generateFallbackStatement(ans, result.primary, result.secondary));
-        setBLoad(false);
-      });
+      .then(s => { setBrand(s); setBLoad(false); })
+      .catch(() => { setBErr(true); setBLoad(false); });
   };
 
   const copy = () => {
@@ -519,9 +518,13 @@ export default function NicheSelector() {
 
       {/* ══ HEADER ══════════════════════════════════════════ */}
       <header className="hdr">
-        <a className="brand" href="https://marginmomentum.co">Margin &amp; Momentum™ · Niche Selector</a>
-        {phase === "quiz" && ( <span className="tag">{qi+1} / {TOTAL}</span> )}
-        {phase === "results" && ( <span className="tag">Diagnostic Complete</span> )}
+        <a className="brand" href="https://systems.marginmomentum.co">Margin &amp; Momentum™ · Niche Selector</a>
+        {phase === "quiz" && (
+          <span className="tag">{qi+1} / {TOTAL}</span>
+        )}
+        {phase === "results" && (
+          <span className="tag">Diagnostic Complete</span>
+        )}
       </header>
 
       {/* ══ PROGRESS ════════════════════════════════════════ */}
@@ -535,25 +538,40 @@ export default function NicheSelector() {
       {phase === "landing" && (
         <main className="main">
           <span className="eyebrow fade-up">VA Launch System · Diagnostic Tool</span>
-          <h1 className="big-title fade-up-1">Find Your<br/><span className="outline-text">Perfect</span><br/>Niche.</h1>
+          <h1 className="big-title fade-up-1">
+            Find Your<br/>
+            <span className="outline-text">Perfect</span><br/>
+            Niche.
+          </h1>
           <div className="divider fade-up-2" />
           <p className="body-text fade-up-2">
-            12 questions. A specific niche match from 11 high-demand VA specialisations.
+            12 questions. A specific niche match from 12 high-demand VA specializations.
             An AI-written brand statement ready to paste into your resume and proposals.
           </p>
+
           <div className="meta-row fade-up-3">
-            {[["11","Niches mapped"],["12","Questions"],["5 min","To complete"],["AI","Brand statement"]].map(([n,l]) => (
-              <div className="meta-item" key={l}><span className="meta-num">{n}</span><span className="meta-lbl">{l}</span></div>
+            {[["12","Niches mapped"],["12","Questions"],["5 min","To complete"],["AI","Brand statement"]].map(([n,l]) => (
+              <div className="meta-item" key={l}>
+                <span className="meta-num">{n}</span>
+                <span className="meta-lbl">{l}</span>
+              </div>
             ))}
           </div>
+
           <div className="fade-up-4">
-            <button className="btn-primary" onClick={start}>Start the Diagnostic →</button>
+            <button className="btn-primary" onClick={start}>
+              Start the Diagnostic →
+            </button>
           </div>
+
           <div style={{marginTop:48, borderTop:"1px solid #ebebeb", paddingTop:32}}>
-            <span className="section-lbl">11 niches covered</span>
+            <span className="section-lbl">12 niches covered</span>
             <div style={{display:"flex",flexWrap:"wrap",gap:8}}>
               {Object.values(NICHES).map(n => (
-                <span key={n.label} style={{fontFamily:"'DM Mono',monospace", fontSize:10, letterSpacing:"0.5px", border:"1px solid #e0e0e0", padding:"5px 12px", color:"#555"}}>
+                <span key={n.label} style={{
+                  fontFamily:"'DM Mono',monospace", fontSize:10, letterSpacing:"0.5px",
+                  border:"1px solid #e0e0e0", padding:"5px 12px", color:"#555"
+                }}>
                   {n.icon} {n.label}
                 </span>
               ))}
@@ -568,36 +586,69 @@ export default function NicheSelector() {
           <span className="eyebrow fade-up">{q.multi ? "Select all that apply" : `Question ${q.n} of ${TOTAL}`}</span>
           <h2 className="q-text fade-up-1">{q.text}</h2>
           <p className="q-sub fade-up-2">{q.sub}</p>
+
+          {/* MULTI-SELECT (Q04 tools) */}
           {q.multi ? (
             <>
-              <span className="tools-note fade-up-2">
-                {(Array.isArray(sel) && sel.length > 0) ? `${sel.length} tool(s) selected` : "No tools yet? Skip ahead and we'll build from scratch."}
-              </span>
+              {(Array.isArray(sel) && sel.length > 0) && (
+                <span className="tools-note fade-up-2">
+                  {sel.length} tool{sel.length > 1 ? "s" : ""} selected — click to deselect
+                </span>
+              )}
+              {!(Array.isArray(sel) && sel.length > 0) && (
+                <span className="tools-note fade-up-2">
+                  No tools yet? That's fine — skip ahead and we'll build from scratch.
+                </span>
+              )}
               <div className="check-grid fade-up-3">
                 {q.opts.map((opt, i) => (
-                  <button key={i} className={`check-opt${isSelected(i) ? " sel" : ""}`} onClick={() => pick(i)}>
+                  <button
+                    key={i}
+                    className={`check-opt${isSelected(i) ? " sel" : ""}`}
+                    onClick={() => pick(i)}
+                  >
                     <span className="check-box">{isSelected(i) ? "✓" : ""}</span>
-                    <span className="check-text">{opt.t}{opt.sub && <span style={{display:"block",opacity:0.6,fontSize:9,marginTop:2}}>{opt.sub}</span>}</span>
+                    <span className="check-text">
+                      {opt.t}
+                      {opt.sub && <span style={{display:"block",opacity:0.6,fontSize:9,marginTop:2}}>{opt.sub}</span>}
+                    </span>
                   </button>
                 ))}
               </div>
             </>
           ) : (
+            /* SINGLE SELECT */
             <div className="options fade-up-3">
               {q.opts.map((opt, i) => (
-                <button key={i} className={`option${isSelected(i) ? " sel" : ""}`} onClick={() => pick(i)}>
+                <button
+                  key={i}
+                  className={`option${isSelected(i) ? " sel" : ""}`}
+                  onClick={() => pick(i)}
+                >
                   <span className="opt-marker">{isSelected(i) ? "✓" : (i+1)}</span>
                   <span className="opt-text">{opt.t}</span>
                 </button>
               ))}
             </div>
           )}
+
           <div style={{display:"flex",gap:10,marginTop:4}} className="fade-up-4">
             <button className="btn-outline" onClick={back} style={{padding:"15px 24px"}}>← Back</button>
-            <button className="btn-primary" onClick={next} disabled={!canProceed} style={{flex:1,justifyContent:"center"}}>
+            <button
+              className="btn-primary"
+              onClick={next}
+              disabled={!canProceed}
+              style={{flex:1,justifyContent:"center"}}
+            >
               {qi < TOTAL - 1 ? "Next →" : "See My Results →"}
             </button>
           </div>
+
+          {q.multi && (
+            <p style={{fontFamily:"'DM Mono',monospace",fontSize:9,color:"#ccc",letterSpacing:"1.5px",textAlign:"center",marginTop:14}}>
+              Q{q.n} OF {TOTAL} · MULTI-SELECT
+            </p>
+          )}
         </main>
       )}
 
@@ -605,9 +656,186 @@ export default function NicheSelector() {
       {phase === "calc" && (
         <main className="main" style={{display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:24,minHeight:"60vh"}}>
           <div className="spin" />
-          <div style={{textAlign:"center"}}>
-            <div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:36,letterSpacing:"1px",color:"#0a0a0a"}}>Analysing Your Profile</div>
-            <p style={{fontFamily:"'DM Mono',monospace",fontSize:10,letterSpacing:"2px",color:"#aaa"}}>MAPPING SKILLS ACROSS 11 VA NICHES</p>
+          <div>
+            <div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:36,letterSpacing:"1px",color:"#0a0a0a",textAlign:"center",marginBottom:8}}>
+              Analyzing Your Profile
+            </div>
+            <p style={{fontFamily:"'DM Mono',monospace",fontSize:10,letterSpacing:"2px",color:"#aaa",textAlign:"center"}}>
+              MAPPING SKILLS ACROSS 12 VA NICHES
+            </p>
+          </div>
+        </main>
+      )}
+
+      {/* ══ RESULTS ═════════════════════════════════════════ */}
+      {phase === "results" && result && pn && sn && (
+        <main className="main">
+
+          {/* Header */}
+          <span className="eyebrow">Diagnostic Complete · Your Niche Match</span>
+          <h1 className="big-title">
+            You Are A<br/>
+            <span className="outline-text">{pn.icon}</span><br/>
+            {pn.label.split(" ").map((w,i) => <span key={i}>{w}<br/></span>)}
+          </h1>
+          <div className="divider" />
+          <p className="body-text">
+            Based on your background, skills, and goals — here is your full breakdown across all 12 niches.
+          </p>
+
+          {/* Primary niche card */}
+          <div className="blk-box">
+            <span style={{fontFamily:"'DM Mono',monospace",fontSize:9,letterSpacing:"3px",color:"rgba(255,255,255,0.4)",textTransform:"uppercase",display:"block",marginBottom:14}}>
+              Primary Recommendation
+            </span>
+            <div className="result-niche">{pn.label}</div>
+
+            <div style={{display:"flex",gap:8,flexWrap:"wrap",marginBottom:16}}>
+              <span className="pill">🇵🇭 {pn.php}</span>
+              <span className="pill">💵 {pn.usd}</span>
+              <span className="pill">{pn.demand} Demand</span>
+            </div>
+
+            <p style={{fontFamily:"'DM Mono',monospace",fontSize:10,letterSpacing:"1px",color:"rgba(255,255,255,0.45)",marginBottom:20}}>
+              Mid-level target: <strong style={{color:"rgba(255,255,255,0.8)"}}>{pn.tier2}</strong>
+            </p>
+
+            {/* Why */}
+            <div style={{borderTop:"1px solid rgba(255,255,255,0.1)",paddingTop:20,marginBottom:20}}>
+              <span style={{fontFamily:"'DM Mono',monospace",fontSize:9,letterSpacing:"2.5px",color:"rgba(255,255,255,0.3)",textTransform:"uppercase",display:"block",marginBottom:14}}>
+                Why This Niche Fits Your Profile
+              </span>
+              {buildReasons(ans, result.primary).map((r,i) => (
+                <div className="reason-item" key={i}>
+                  <span className="reason-mark">✓</span>
+                  <span className="reason-text">{r}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* Tools */}
+            <div style={{display:"flex",gap:6,flexWrap:"wrap"}}>
+              {pn.tools.map(t => <span className="tool-tag" key={t}>{t}</span>)}
+            </div>
+          </div>
+
+          {/* AI Brand Statement */}
+          <div className="brand-box">
+            <span className="section-lbl" style={{marginBottom:16}}>
+              ✦ AI-Generated · Your VA Brand Statement
+            </span>
+            <p style={{fontFamily:"'DM Mono',monospace",fontSize:10,letterSpacing:"1px",color:"#aaa",marginBottom:16}}>
+              Paste directly into your resume, OnlineJobsPH profile, and proposals.
+            </p>
+
+            {bLoad && (
+              <div style={{display:"flex",alignItems:"center",gap:12,padding:"12px 0"}}>
+                <div className="spin" style={{width:20,height:20,borderWidth:"1.5px"}} />
+                <span style={{fontFamily:"'DM Mono',monospace",fontSize:10,letterSpacing:"1.5px",color:"#aaa"}}>
+                  GENERATING YOUR STATEMENT…
+                </span>
+              </div>
+            )}
+
+            {!bLoad && bErr && (
+              <div style={{border:"1px solid #e0e0e0",padding:"14px 18px",marginBottom:16,background:"#fafafa"}}>
+                <p style={{fontFamily:"'Libre Baskerville',serif",fontSize:13,color:"#666",lineHeight:1.6}}>
+                  Couldn't reach the AI — check your connection and click Regenerate.
+                </p>
+              </div>
+            )}
+
+            {!bLoad && brand && (
+              <>
+                <div className="brand-quote">{brand}</div>
+                <div style={{display:"flex",gap:8}}>
+                  <button className="btn-primary" onClick={copy} style={{fontSize:9,padding:"12px 22px"}}>
+                    {copied ? "✓ Copied!" : "Copy Statement"}
+                  </button>
+                  <button className="btn-outline" onClick={regen} style={{fontSize:9,padding:"11px 18px"}}>
+                    ↺ Regenerate
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
+
+          {/* Secondary niche */}
+          <div className="secondary-card">
+            <span style={{fontSize:28,flexShrink:0}}>{sn.icon}</span>
+            <div>
+              <span style={{fontFamily:"'DM Mono',monospace",fontSize:9,letterSpacing:"2.5px",color:"#aaa",textTransform:"uppercase",display:"block",marginBottom:6}}>
+                Secondary Niche · Consider in 6–12 Months
+              </span>
+              <div style={{fontFamily:"'Libre Baskerville',serif",fontWeight:700,fontSize:18,color:"#0a0a0a",marginBottom:4}}>{sn.label}</div>
+              <div style={{fontFamily:"'DM Mono',monospace",fontSize:11,color:"#777"}}>{sn.php} · {sn.usd}</div>
+            </div>
+          </div>
+
+          {/* Score bars */}
+          <div style={{marginBottom:40,paddingBottom:40,borderBottom:"1px solid #ebebeb"}}>
+            <span className="section-lbl" style={{marginBottom:20}}>Full Compatibility Breakdown · All 12 Niches</span>
+            {result.sorted.map(([id, sc]) => {
+              const n = NICHES[id];
+              const maxSc = result.sorted[0][1] || 1;
+              const w = Math.round((sc / maxSc) * 100);
+              const isPrimary = id === result.primary;
+              return (
+                <div className="score-row" key={id}>
+                  <span className="score-icon">{n.icon}</span>
+                  <span className={`score-lbl${isPrimary ? " primary" : ""}`}>{n.label}</span>
+                  <div className="score-track">
+                    <div className={`score-fill${isPrimary ? "" : " secondary"}`} style={{width:`${w}%`}} />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Next steps */}
+          <div style={{marginBottom:40}}>
+            <h3 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:32,letterSpacing:"1px",color:"#0a0a0a",marginBottom:28}}>
+              Your Next 3 Steps
+            </h3>
+            <div className="step-grid">
+              {[
+                `Copy your brand statement above and paste it into the Professional Summary section of your <strong>${pn.label}</strong> resume template in <strong>Module 1</strong>.`,
+                `Open <strong>Module 2</strong> and complete the practice project kit for the <strong>${pn.label}</strong> niche. Do not send a single application before your portfolio is live.`,
+                `Run the <strong>7-Day First Client Sprint</strong> (Module 3) using the proposal templates for the <strong>${pn.label}</strong> niche. Target: 5 applications per day from Day 1.`,
+              ].map((txt, i) => (
+                <>
+                  <span className="step-num" key={`n-${i}`}>{String(i+1).padStart(2,"0")}</span>
+                  <div className="step-text" key={`t-${i}`}
+                    dangerouslySetInnerHTML={{__html: txt.replace(/<strong>/g,'<strong style="color:#0a0a0a">')}} />
+                </>
+              ))}
+            </div>
+          </div>
+
+          {/* Rate reference */}
+          <div style={{marginBottom:40}}>
+            <span className="section-lbl" style={{marginBottom:0}}>All 12 Niche Rate Ranges · 2025–2026 Philippine VA Market</span>
+            <div style={{border:"1.5px solid #0a0a0a",overflow:"hidden",marginTop:16}}>
+              <div style={{display:"grid",gridTemplateColumns:"1fr",background:"#0a0a0a",padding:"8px 12px"}}>
+                <div style={{display:"flex",alignItems:"center",gap:10}}>
+                  <span style={{fontFamily:"'DM Mono',monospace",fontSize:9,letterSpacing:"2px",color:"rgba(255,255,255,0.4)",flex:1}}>NICHE</span>
+                  <span style={{fontFamily:"'DM Mono',monospace",fontSize:9,letterSpacing:"2px",color:"rgba(255,255,255,0.4)",width:160}}>PHILIPPINES</span>
+                  <span style={{fontFamily:"'DM Mono',monospace",fontSize:9,letterSpacing:"2px",color:"rgba(255,255,255,0.4)",width:80}}>USD/HR</span>
+                </div>
+              </div>
+              {Object.entries(NICHES).map(([id, n]) => (
+                <div className={`rate-row${id===result.primary?" highlight":""}`} key={id}>
+                  <span className="rate-icon">{n.icon}</span>
+                  <span className="rate-lbl">{n.label}</span>
+                  <span className="rate-php" style={{width:160}}>{n.php}</span>
+                  <span className="rate-usd" style={{width:80}}>{n.usd}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div style={{display:"flex",gap:10,flexWrap:"wrap"}}>
+            <button className="btn-outline" onClick={restart}>↺ Retake Diagnostic</button>
           </div>
         </main>
       )}
@@ -617,7 +845,9 @@ export default function NicheSelector() {
         <main className="main fade-up">
           <span className="eyebrow">Diagnostic Complete · Your Result Is Ready</span>
           <h2 className="q-text" style={{marginBottom:8}}>One last step.</h2>
-          <p className="q-sub" style={{marginBottom:32}}>Unlock your match and AI brand statement below.</p>
+          <p className="q-sub" style={{marginBottom:32}}>
+            Your niche match and AI-written brand statement are ready. Enter your email to unlock them — we'll also send you the free tools built for your niche.
+          </p>
           <div className="gate-wrap">
             <div className="gate-teaser">
               <span className="gate-teaser-label">Your Primary Niche</span>
@@ -625,84 +855,32 @@ export default function NicheSelector() {
               <span className="gate-teaser-hint">↓ Enter your email to reveal</span>
             </div>
             <div className="gate-input-wrap">
-              <input className={`gate-input${emailErr ? " err" : ""}`} type="email" placeholder="your@email.com" value={email} onChange={e => { setEmail(e.target.value); setEmailErr(false); }} onKeyDown={e => e.key === "Enter" && submitGate()} />
-              <button className="btn-primary" onClick={submitGate}>Reveal My Niche →</button>
+              <input
+                className={`gate-input${emailErr ? " err" : ""}`}
+                type="email"
+                placeholder="your@email.com"
+                value={email}
+                onChange={e => { setEmail(e.target.value); setEmailErr(false); }}
+                onKeyDown={e => e.key === "Enter" && submitGate()}
+              />
+              <button className="btn-primary" onClick={submitGate} style={{whiteSpace:"nowrap"}}>
+                Reveal My Niche →
+              </button>
             </div>
-            {emailErr && <span style={{fontFamily:"'DM Mono',monospace",fontSize:9,color:"#c00",display:"block",marginTop:8}}>Please enter a valid email.</span>}
-          </div>
-        </main>
-      )}
-
-      {/* ══ RESULTS ═════════════════════════════════════════ */}
-      {phase === "results" && result && pn && sn && (
-        <main className="main">
-          <span className="eyebrow">Your Niche Match</span>
-          <h1 className="big-title">You Are A<br/><span className="outline-text">{pn.icon}</span><br/>{pn.label}</h1>
-          <div className="divider" />
-          
-          <div className="blk-box">
-            <span className="section-lbl" style={{color:"rgba(255,255,255,0.4)"}}>Primary Recommendation</span>
-            <div className="result-niche">{pn.label}</div>
-            <div style={{display:"flex",gap:8,flexWrap:"wrap",marginBottom:16}}>
-              <span className="pill">🇵🇭 {pn.php}</span><span className="pill">💵 {pn.usd}</span><span className="pill">{pn.demand} Demand</span>
-            </div>
-            <div style={{borderTop:"1px solid rgba(255,255,255,0.1)",paddingTop:20,marginBottom:20}}>
-              {buildReasons(ans, result.primary).map((r,i) => (
-                <div className="reason-item" key={i}><span className="reason-mark">✓</span><span className="reason-text">{r}</span></div>
-              ))}
-            </div>
-            <div style={{display:"flex",gap:6,flexWrap:"wrap"}}>
-              {pn.tools.map(t => <span className="tool-tag" key={t}>{t}</span>)}
-            </div>
-          </div>
-
-          <div className="brand-box">
-            <span className="section-lbl">✦ AI-Generated Brand Statement</span>
-            {bLoad ? (
-              <div style={{display:"flex",alignItems:"center",gap:12,padding:"12px 0"}}><div className="spin" style={{width:20,height:20}} /><span style={{fontSize:10,color:"#aaa"}}>GENERATING…</span></div>
-            ) : (
-              <>
-                <div className="brand-quote">{brand}</div>
-                <div style={{display:"flex",gap:8}}>
-                  <button className="btn-primary" onClick={copy} style={{fontSize:9}}>{copied ? "✓ Copied!" : "Copy Statement"}</button>
-                  <button className="btn-outline" onClick={regen} style={{fontSize:9}}>↺ Regenerate</button>
-                </div>
-              </>
+            {emailErr && (
+              <span style={{fontFamily:"'DM Mono',monospace",fontSize:9,letterSpacing:"1.5px",color:"#c00",textTransform:"uppercase",display:"block",marginBottom:8}}>
+                Please enter a valid email address.
+              </span>
             )}
+            <span className="gate-note">No spam. No upsells. Just your result and the free tools.</span>
           </div>
-
-          <div className="secondary-card">
-            <span style={{fontSize:28}}>{sn.icon}</span>
-            <div>
-              <span className="section-lbl" style={{marginBottom:4}}>Secondary Niche</span>
-              <div style={{fontWeight:700,fontSize:18}}>{sn.label}</div>
-              <div style={{fontSize:11,color:"#777"}}>{sn.php} · {sn.usd}</div>
-            </div>
-          </div>
-
-          <div style={{marginBottom:40,paddingBottom:40,borderBottom:"1px solid #ebebeb"}}>
-            <span className="section-lbl">All 12 Niches · Compatibility Breakdown</span>
-            {result.sorted.map(([id, sc]) => {
-              const n = NICHES[id];
-              const maxSc = result.sorted[0][1] || 1;
-              const w = Math.round((sc / maxSc) * 100);
-              return (
-                <div className="score-row" key={id}>
-                  <span className="score-icon">{n.icon}</span>
-                  <span className={`score-lbl${id === result.primary ? " primary" : ""}`}>{n.label}</span>
-                  <div className="score-track"><div className={`score-fill${id === result.primary ? "" : " secondary"}`} style={{width:`${w}%`}} /></div>
-                </div>
-              );
-            })}
-          </div>
-
-          <button className="btn-outline" onClick={restart}>↺ Retake Diagnostic</button>
         </main>
       )}
+
 
       <footer className="ftr">
-        <span className="ftr-l">Margin &amp; Momentum™</span>
-        <span className="ftr-r">Niche Selector Engine · <a href="https://systems.marginmomentum.co" style={{color:"#fff",textDecoration:"none"}}>← Back to Tools</a></span>
+        <span className="ftr-l">Margin &amp; Momentum™ · Systems Over Hustle™</span>
+        <span className="ftr-r">Niche Selector Engine · 12 Niches · <a href="https://systems.marginmomentum.co" style={{color:"#fff",textDecoration:"none",letterSpacing:"2px"}}>← Back to Free Tools</a></span>
       </footer>
     </div>
   );
