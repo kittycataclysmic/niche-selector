@@ -171,7 +171,7 @@ const QS = [
     text:"Which tasks do you genuinely enjoy most?",
     sub:"Be honest — your natural enjoyment is a stronger signal than what you think you should pick.",
     opts:[
-      { t:"Organizing calendars, inboxes, and schedules",          s:{exec:3,books:1} },
+      { t:"Organising calendars, inboxes, and schedules",          s:{exec:3,books:1} },
       { t:"Creating graphics, captions, and visual content",       s:{social:3,content:1} },
       { t:"Writing articles, blog posts, or persuasive copy",      s:{content:3,social:1,media:1} },
       { t:"Tracking numbers, formulas, and spreadsheets",          s:{books:3,realty:1,ecom:1} },
@@ -225,7 +225,7 @@ const QS = [
     sub:"There is no right answer — this is about what you can sustain for years, not just weeks.",
     opts:[
       { t:"Deep focus — best work on one task for hours",    s:{content:2,books:2,legal:2} },
-      { t:"Multi-tasking — you thrive when juggling multiple priorities at once",  s:{exec:2,cx:2,health:1} },
+      { t:"Multi-tasking — thriving while juggling things",  s:{exec:2,cx:2,health:1} },
       { t:"Creative output — making things people can see",  s:{social:2,ecom:1,content:1,media:2} },
       { t:"Systems thinking — building processes and SOPs",  s:{exec:2,books:1,realty:1,edu:1} },
       { t:"Research-driven — digging for data and insights", s:{realty:2,books:2,ecom:1,legal:2} },
@@ -249,7 +249,7 @@ const QS = [
     text:"How confident are you in your written English?",
     sub:"This directly determines which niches and clients are accessible right now.",
     opts:[
-      { t:"Excellent — I've written reports, articles, or professional emails professionally", s:{content:3,exec:2,realty:1,legal:2} },
+      { t:"Excellent — written reports, articles, or professional emails before", s:{content:3,exec:2,realty:1,legal:2} },
       { t:"Good — I write clear, professional English comfortably",               s:{cx:2,exec:2,social:1,ecom:1,health:1} },
       { t:"Average — I communicate fine but prefer less writing",                 s:{books:1,ecom:1} },
       { t:"Still improving — writing in English feels challenging",               s:{ecom:1,books:1} },
@@ -262,7 +262,7 @@ const QS = [
     opts:[
       { t:"Very comfortable — spreadsheets and formulas are satisfying",  s:{books:3,realty:2,ecom:1} },
       { t:"Comfortable — basic math and Excel formulas are no problem",   s:{ecom:2,realty:1,exec:1} },
-      { t:"Neutral — I can do it, but it is not my preference",            s:{social:1,cx:1,media:1} },
+      { t:"Neutral — I can do it but it is not my preference",            s:{social:1,cx:1,media:1} },
       { t:"Prefer to avoid — numbers genuinely stress me out",            s:{content:1,social:1,edu:1} },
     ],
   },
@@ -402,7 +402,7 @@ function buildReasons(ans, primary) {
   const q06 = ans.q06 !== undefined ? QS[5].opts[ans.q06]?.t : null;
   const q04 = (ans.q04 || []).length > 0 ? `${(ans.q04 || []).length} relevant tool${(ans.q04||[]).length>1?"s":""}` : null;
   if (q10) r.push(`You chose "${q10.toLowerCase()}" as your preferred industry — a direct match for this niche.`);
-  if (q03) r.push(`Your favorite tasks ("${q03.toLowerCase()}") are the core deliverables ${n.label}s are hired to do.`);
+  if (q03) r.push(`Your favourite tasks ("${q03.toLowerCase()}") are the core deliverables ${n.label}s are hired to do.`);
   if (q02 && !q02.includes("Fresh grad")) r.push(`Your background in "${q02.toLowerCase()}" gives you transferable credibility most beginners are still building.`);
   if (q12) r.push(`Your top strength — "${q12.toLowerCase()}" — is exactly what ${n.label} clients pay a premium for.`);
   if (q04 && r.length < 3) r.push(`You already have exposure to ${q04} in this space — a head start over most applicants.`);
@@ -467,8 +467,7 @@ export default function NicheSelector() {
   };
 
   const submitGate = async () => {
-    const emailRegex = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
-    if (!emailRegex.test(email.trim())) { setEmailErr(true); return; }
+    if (!email.includes("@")) { setEmailErr(true); return; }
     setEmailErr(false);
     try {
       const fd = new FormData();
@@ -518,7 +517,7 @@ export default function NicheSelector() {
 
       {/* ══ HEADER ══════════════════════════════════════════ */}
       <header className="hdr">
-        <a className="brand" href="https://systems.marginmomentum.co">Margin &amp; Momentum™ · Niche Selector</a>
+        <a className="brand" href="https://marginmomentum.co">Margin &amp; Momentum™ · Niche Selector</a>
         {phase === "quiz" && (
           <span className="tag">{qi+1} / {TOTAL}</span>
         )}
@@ -545,12 +544,12 @@ export default function NicheSelector() {
           </h1>
           <div className="divider fade-up-2" />
           <p className="body-text fade-up-2">
-            12 questions. A specific niche match from 12 high-demand VA specializations.
+            12 questions. A specific niche match from 11 high-demand VA specialisations.
             An AI-written brand statement ready to paste into your resume and proposals.
           </p>
 
           <div className="meta-row fade-up-3">
-            {[["12","Niches mapped"],["12","Questions"],["5 min","To complete"],["AI","Brand statement"]].map(([n,l]) => (
+            {[["11","Niches mapped"],["12","Questions"],["5 min","To complete"],["AI","Brand statement"]].map(([n,l]) => (
               <div className="meta-item" key={l}>
                 <span className="meta-num">{n}</span>
                 <span className="meta-lbl">{l}</span>
@@ -565,7 +564,7 @@ export default function NicheSelector() {
           </div>
 
           <div style={{marginTop:48, borderTop:"1px solid #ebebeb", paddingTop:32}}>
-            <span className="section-lbl">12 niches covered</span>
+            <span className="section-lbl">11 niches covered</span>
             <div style={{display:"flex",flexWrap:"wrap",gap:8}}>
               {Object.values(NICHES).map(n => (
                 <span key={n.label} style={{
@@ -658,10 +657,10 @@ export default function NicheSelector() {
           <div className="spin" />
           <div>
             <div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:36,letterSpacing:"1px",color:"#0a0a0a",textAlign:"center",marginBottom:8}}>
-              Analyzing Your Profile
+              Analysing Your Profile
             </div>
             <p style={{fontFamily:"'DM Mono',monospace",fontSize:10,letterSpacing:"2px",color:"#aaa",textAlign:"center"}}>
-              MAPPING SKILLS ACROSS 12 VA NICHES
+              MAPPING SKILLS ACROSS 11 VA NICHES
             </p>
           </div>
         </main>
@@ -675,12 +674,12 @@ export default function NicheSelector() {
           <span className="eyebrow">Diagnostic Complete · Your Niche Match</span>
           <h1 className="big-title">
             You Are A<br/>
-            <span className="outline-text">{pn.icon}</span><br/>
-            {pn.label.split(" ").map((w,i) => <span key={i}>{w}<br/></span>)}
+            <span style={{whiteSpace:"nowrap"}}>{pn.icon} {pn.label.split(" ")[0]}</span>
+            {pn.label.split(" ").slice(1).map((w,i) => <span key={i}><br/>{w}</span>)}
           </h1>
           <div className="divider" />
           <p className="body-text">
-            Based on your background, skills, and goals — here is your full breakdown across all 12 niches.
+            Based on your background, skills, and goals — here is your full breakdown across all 11 niches.
           </p>
 
           {/* Primary niche card */}
