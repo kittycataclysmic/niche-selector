@@ -3,108 +3,161 @@ import { useState } from "react";
 const CSS = `
   @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@400;500&display=swap');
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: #F5F2EE; }
-  .hdr { border-bottom: 2px solid #0a0a0a; padding: 14px 40px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: #F5F2EE; z-index: 200; }
-  .brand { font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: #0a0a0a; text-decoration: none; }
-  .hdr-right { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: #aaa; text-decoration: none; }
-  .prog { height: 3px; background: #ebebeb; }
-  .prog-fill { height: 100%; background: #0a0a0a; transition: width 0.5s ease; }
-  .main { flex: 1; max-width: 700px; margin: 0 auto; width: 100%; padding: 56px 40px 80px; }
-  .ftr { background: #0a0a0a; padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; }
-  .ftr-l { font-family: 'DM Mono', monospace; font-size: 9px; font-weight: 500; letter-spacing: 2.5px; text-transform: uppercase; color: #fff; }
-  .ftr-r { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(255,255,255,0.4); }
-  .eyebrow { font-family: 'DM Mono', monospace; font-size: 9px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: #888; display: block; margin-bottom: 20px; }
-  .big-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 9vw, 80px); line-height: 0.92; color: #0a0a0a; letter-spacing: 1px; margin-bottom: 28px; }
-  .outline-text { -webkit-text-stroke: 2px #0a0a0a; color: transparent; }
-  .divider { width: 40px; height: 3px; background: #0a0a0a; margin-bottom: 28px; }
-  .body-text { font-size: 14.5px; line-height: 1.85; color: #333; margin-bottom: 36px; }
-  .meta-row { display: flex; gap: 32px; margin-bottom: 48px; padding-bottom: 40px; border-bottom: 1px solid #e8e8e8; flex-wrap: wrap; }
-  .meta-item { display: flex; flex-direction: column; gap: 4px; }
-  .meta-num { font-family: 'Bebas Neue', sans-serif; font-size: 42px; color: #0a0a0a; line-height: 1; }
-  .meta-lbl { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: #aaa; }
-  .btn-primary { display: inline-flex; align-items: center; gap: 10px; background: #0a0a0a; color: #fff; font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 2.5px; text-transform: uppercase; padding: 16px 32px; border: none; cursor: pointer; transition: background 0.2s; }
-  .btn-primary:hover { background: #333; }
-  .btn-primary:disabled { opacity: 0.35; cursor: default; }
-  .btn-outline { display: inline-flex; align-items: center; gap: 10px; background: transparent; color: #0a0a0a; font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 2.5px; text-transform: uppercase; padding: 15px 31px; border: 1.5px solid #0a0a0a; cursor: pointer; transition: all 0.2s; }
-  .btn-outline:hover { background: #0a0a0a; color: #fff; }
-  .section-lbl { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: #aaa; display: block; margin-bottom: 10px; }
-  .q-text { font-family: 'Libre Baskerville', serif; font-size: clamp(18px, 3vw, 26px); font-weight: 700; line-height: 1.35; color: #0a0a0a; margin-bottom: 10px; }
-  .q-sub { font-family: 'Libre Baskerville', serif; font-size: 13.5px; line-height: 1.7; color: #777; margin-bottom: 32px; font-style: italic; }
-  .options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 44px; }
-  .option { display: flex; align-items: flex-start; gap: 16px; padding: 18px 22px; border: 1.5px solid #D9D4CE; background: #F5F2EE; cursor: pointer; text-align: left; width: 100%; transition: all 0.15s; }
-  .option.sel { border-color: #0a0a0a; background: #0a0a0a; }
-  .option:hover:not(.sel) { border-color: #0a0a0a; }
-  .opt-marker { flex-shrink: 0; width: 22px; height: 22px; border: 1.5px solid #ccc; display: flex; align-items: center; justify-content: center; font-family: 'DM Mono', monospace; font-size: 11px; color: #ccc; margin-top: 1px; }
-  .option.sel .opt-marker { border-color: #fff; background: #F5F2EE; color: #0a0a0a; }
-  .opt-text { font-family: 'Libre Baskerville', serif; font-size: 14px; line-height: 1.6; color: #333; }
-  .option.sel .opt-text { color: #fff; }
+  html { scroll-behavior: smooth; }
+  :root {
+    --deep: #0F0D0B; --ink: #1A1714; --fog: #EDE9E3; --ash: #D9D4CE;
+    --steel: #6B7280; --text-on-dark: #E8E4DF; --text-muted: #A09C96;
+    --rule: rgba(237,233,227,0.12);
+  }
+  body { background: var(--deep); -webkit-font-smoothing: antialiased; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; opacity: 0.6; }
+
+  /* NAV */
+  .hdr { border-bottom: 1px solid var(--rule); padding: 0 48px; height: 65px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: rgba(15,13,11,0.88); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); z-index: 200; }
+  .brand { font-family: 'Bebas Neue', sans-serif; font-size: 22px; font-weight: 400; letter-spacing: 0.08em; color: var(--fog); text-decoration: none; }
+  .hdr-right { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--steel); }
+
+  /* PROGRESS */
+  .prog { height: 2px; background: var(--rule); position: relative; z-index: 1; }
+  .prog-fill { height: 100%; background: var(--fog); transition: width 0.5s ease; }
+
+  /* LAYOUT */
+  .mm-wrap { font-family: 'Libre Baskerville', Georgia, serif; color: var(--text-on-dark); min-height: 100vh; display: flex; flex-direction: column; position: relative; }
+  .main { flex: 1; max-width: 720px; margin: 0 auto; width: 100%; padding: 56px 48px 96px; position: relative; z-index: 1; }
+
+  /* FOOTER */
+  .ftr { border-top: 1px solid var(--rule); padding: 20px 48px; display: flex; justify-content: space-between; align-items: center; background: var(--ink); position: relative; z-index: 1; }
+  .ftr-l { font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 0.08em; color: var(--fog); }
+  .ftr-r { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--steel); }
+
+  /* TYPOGRAPHY */
+  .eyebrow { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--steel); display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .eyebrow::before { content: ''; display: inline-block; width: 24px; height: 1px; background: var(--steel); flex-shrink: 0; }
+  .big-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(56px, 9vw, 96px); line-height: 0.92; color: var(--fog); letter-spacing: 0.01em; margin-bottom: 28px; }
+  .outline-text { -webkit-text-stroke: 1.5px var(--fog); color: transparent; }
+  .divider { width: 40px; height: 2px; background: rgba(237,233,227,0.2); margin-bottom: 28px; }
+  .body-text { font-size: 17px; line-height: 1.85; color: var(--text-muted); margin-bottom: 36px; }
+  .section-lbl { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--steel); display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .section-lbl::before { content: ''; display: inline-block; width: 16px; height: 1px; background: var(--steel); flex-shrink: 0; }
+
+  /* STATS */
+  .meta-row { display: flex; gap: 40px; margin-bottom: 48px; padding-bottom: 40px; border-bottom: 1px solid var(--rule); flex-wrap: wrap; }
+  .meta-item { display: flex; flex-direction: column; gap: 6px; }
+  .meta-num { font-family: 'Bebas Neue', sans-serif; font-size: 44px; color: var(--fog); line-height: 1; }
+  .meta-lbl { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--steel); }
+
+  /* BUTTONS */
+  .btn-primary { display: inline-flex; align-items: center; gap: 10px; background: var(--fog); color: var(--deep); font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; padding: 16px 32px; border: none; cursor: pointer; transition: background 0.2s; }
+  .btn-primary:hover { background: var(--ash); }
+  .btn-primary:disabled { opacity: 0.3; cursor: default; }
+  .btn-outline { display: inline-flex; align-items: center; gap: 10px; background: transparent; color: var(--fog); font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; padding: 15px 31px; border: 1px solid rgba(237,233,227,0.2); cursor: pointer; transition: all 0.2s; }
+  .btn-outline:hover { background: var(--fog); color: var(--deep); border-color: var(--fog); }
+
+  /* QUIZ */
+  .q-text { font-family: 'Libre Baskerville', serif; font-size: clamp(18px, 3vw, 26px); font-weight: 700; line-height: 1.4; color: var(--fog); margin-bottom: 10px; }
+  .q-sub { font-family: 'Libre Baskerville', serif; font-size: 14px; line-height: 1.7; color: var(--text-muted); margin-bottom: 32px; font-style: italic; border-left: 2px solid var(--steel); padding-left: 20px; }
+  .options { display: flex; flex-direction: column; gap: 8px; margin-bottom: 44px; }
+  .option { display: flex; align-items: flex-start; gap: 16px; padding: 18px 22px; border: 1px solid var(--rule); background: rgba(237,233,227,0.02); cursor: pointer; text-align: left; width: 100%; transition: all 0.15s; }
+  .option:hover:not(.sel) { border-color: rgba(237,233,227,0.25); background: rgba(237,233,227,0.04); }
+  .option.sel { border-color: var(--fog); background: var(--fog); }
+  .opt-marker { flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%; border: 1px solid rgba(237,233,227,0.2); display: flex; align-items: center; justify-content: center; font-family: 'DM Mono', monospace; font-size: 10px; color: var(--steel); margin-top: 1px; transition: all 0.15s; }
+  .option.sel .opt-marker { border-color: var(--deep); background: var(--deep); color: var(--fog); }
+  .opt-text { font-family: 'Libre Baskerville', serif; font-size: 14px; line-height: 1.65; color: var(--text-muted); }
+  .option.sel .opt-text { color: var(--ink); }
+
+  /* MULTI-SELECT */
   .check-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 44px; }
-  .check-opt { display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; border: 1.5px solid #D9D4CE; background: #F5F2EE; cursor: pointer; text-align: left; width: 100%; transition: all 0.15s; }
-  .check-opt.sel { border-color: #0a0a0a; background: #0a0a0a; }
-  .check-opt:hover:not(.sel) { border-color: #0a0a0a; }
-  .check-box { flex-shrink: 0; width: 18px; height: 18px; border: 1.5px solid #ccc; display: flex; align-items: center; justify-content: center; font-size: 11px; color: transparent; margin-top: 1px; }
-  .check-opt.sel .check-box { border-color: #fff; background: #F5F2EE; color: #0a0a0a; }
-  .check-text { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.5px; line-height: 1.55; color: #333; }
-  .check-opt.sel .check-text { color: #fff; }
-  .tools-note { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 2px; color: #aaa; margin-bottom: 16px; display: block; }
-  .blk-box { background: #0a0a0a; padding: 32px; margin-bottom: 32px; }
-  .result-niche { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px, 7vw, 64px); line-height: 0.95; color: #fff; letter-spacing: 1px; margin-bottom: 16px; }
-  .pill { display: inline-flex; align-items: center; gap: 6px; border: 1px solid rgba(255,255,255,0.25); padding: 5px 14px; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 1.5px; color: rgba(255,255,255,0.8); }
-  .tool-tag { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); padding: 4px 10px; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.5px; color: rgba(255,255,255,0.6); }
+  .check-opt { display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; border: 1px solid var(--rule); background: rgba(237,233,227,0.02); cursor: pointer; text-align: left; width: 100%; transition: all 0.15s; }
+  .check-opt:hover:not(.sel) { border-color: rgba(237,233,227,0.25); background: rgba(237,233,227,0.04); }
+  .check-opt.sel { border-color: var(--fog); background: var(--fog); }
+  .check-box { flex-shrink: 0; width: 18px; height: 18px; border: 1px solid rgba(237,233,227,0.2); display: flex; align-items: center; justify-content: center; font-size: 11px; color: transparent; margin-top: 2px; transition: all 0.15s; }
+  .check-opt.sel .check-box { border-color: var(--ink); background: var(--ink); color: var(--fog); }
+  .check-text { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.3px; line-height: 1.55; color: var(--text-muted); }
+  .check-opt.sel .check-text { color: var(--ink); }
+  .tools-note { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--steel); margin-bottom: 16px; display: block; }
+
+  /* RESULT BLOCKS */
+  .blk-box { background: var(--fog); padding: 36px; margin-bottom: 32px; }
+  .result-niche { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px, 7vw, 64px); line-height: 0.95; color: var(--ink); letter-spacing: 0.01em; margin-bottom: 16px; }
+  .pill { display: inline-flex; align-items: center; gap: 6px; border: 1px solid rgba(26,23,20,0.2); padding: 5px 14px; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.1em; color: var(--ink); }
+  .tool-tag { background: rgba(26,23,20,0.08); border: 1px solid rgba(26,23,20,0.15); padding: 4px 10px; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.05px; color: var(--steel); }
   .reason-item { display: flex; gap: 14px; margin-bottom: 14px; align-items: flex-start; }
-  .reason-mark { flex-shrink: 0; font-family: 'DM Mono', monospace; font-size: 10px; color: rgba(255,255,255,0.4); padding-top: 2px; }
-  .reason-text { font-family: 'Libre Baskerville', serif; font-size: 13.5px; color: rgba(255,255,255,0.8); line-height: 1.6; }
-  .brand-box { border: 1.5px solid #D9D4CE; padding: 28px; margin-bottom: 32px; }
-  .brand-quote { font-family: 'Libre Baskerville', serif; font-size: 15px; line-height: 1.85; color: #0a0a0a; font-style: italic; border-left: 3px solid #0a0a0a; padding-left: 20px; margin-bottom: 20px; }
+  .reason-mark { flex-shrink: 0; font-family: 'DM Mono', monospace; font-size: 10px; color: var(--steel); padding-top: 2px; }
+  .reason-text { font-family: 'Libre Baskerville', serif; font-size: 14px; color: var(--ink); line-height: 1.65; }
+
+  /* BRAND BOX */
+  .brand-box { border: 1px solid var(--rule); padding: 32px; margin-bottom: 32px; }
+  .brand-quote { font-family: 'Libre Baskerville', serif; font-size: 15px; line-height: 1.85; color: var(--text-on-dark); font-style: italic; border-left: 2px solid var(--steel); padding-left: 20px; margin-bottom: 24px; }
+
+  /* SCORE BARS */
   .score-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
   .score-icon { font-size: 14px; width: 20px; text-align: center; flex-shrink: 0; }
-  .score-lbl { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.5px; color: #333; min-width: 200px; }
-  .score-lbl.primary { color: #0a0a0a; font-weight: 500; }
-  .score-track { flex: 1; height: 3px; background: #ebebeb; }
-  .score-fill { height: 100%; background: #0a0a0a; transition: width 0.9s cubic-bezier(.4,0,.2,1); }
-  .score-fill.secondary { background: #ccc; }
-  .step-grid { display: grid; grid-template-columns: 32px 1fr; gap: 0 16px; margin-bottom: 32px; }
-  .step-num { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: #0a0a0a; line-height: 1; }
-  .step-text { font-family: 'Libre Baskerville', serif; font-size: 13.5px; line-height: 1.7; color: #333; padding-top: 4px; padding-bottom: 20px; border-bottom: 1px solid #ebebeb; margin-bottom: 4px; }
-  .rate-row { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-bottom: 1px solid #ebebeb; }
-  .rate-row.highlight { background: #0a0a0a; border-color: #0a0a0a; }
-  .rate-icon { font-size: 14px; flex-shrink: 0; }
-  .rate-lbl { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.5px; color: #555; flex: 1; }
-  .rate-row.highlight .rate-lbl { color: #fff; }
-  .rate-php { font-family: 'DM Mono', monospace; font-size: 11px; color: #0a0a0a; font-weight: 500; }
-  .rate-row.highlight .rate-php { color: #fff; }
-  .rate-usd { font-family: 'DM Mono', monospace; font-size: 10px; color: #aaa; }
-  .rate-row.highlight .rate-usd { color: rgba(255,255,255,0.5); }
-  .spin { display: inline-block; width: 28px; height: 28px; border: 2px solid #e0e0e0; border-top-color: #0a0a0a; animation: spin 0.8s linear infinite; }
+  .score-lbl { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.3px; color: var(--text-muted); min-width: 200px; }
+  .score-lbl.primary { color: var(--fog); font-weight: 500; }
+  .score-track { flex: 1; height: 2px; background: var(--rule); }
+  .score-fill { height: 100%; background: var(--fog); transition: width 0.9s cubic-bezier(.4,0,.2,1); }
+  .score-fill.secondary { background: rgba(237,233,227,0.2); }
+
+  /* STEPS */
+  .step-grid { display: grid; grid-template-columns: 40px 1fr; gap: 0 16px; margin-bottom: 32px; }
+  .step-num { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--fog); line-height: 1; }
+  .step-text { font-family: 'Libre Baskerville', serif; font-size: 14px; line-height: 1.75; color: var(--text-muted); padding-top: 4px; padding-bottom: 24px; border-bottom: 1px solid var(--rule); margin-bottom: 4px; }
+
+  /* RATE TABLE */
+  .rate-row { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-bottom: 1px solid var(--rule); }
+  .rate-row.highlight { background: var(--fog); border-color: var(--fog); }
+  .rate-icon { font-size: 13px; flex-shrink: 0; }
+  .rate-lbl { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.3px; color: var(--text-muted); flex: 1; }
+  .rate-row.highlight .rate-lbl { color: var(--ink); }
+  .rate-php { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text-on-dark); font-weight: 500; }
+  .rate-row.highlight .rate-php { color: var(--ink); }
+  .rate-usd { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--steel); }
+  .rate-row.highlight .rate-usd { color: var(--steel); }
+
+  /* GATE */
   .gate-wrap { max-width: 540px; }
-  .gate-teaser { background: #0a0a0a; padding: 28px 32px; margin-bottom: 32px; }
-  .gate-teaser-label { font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.3); display: block; margin-bottom: 10px; }
-  .gate-teaser-text { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: rgba(255,255,255,0.15); letter-spacing: 1px; line-height: 1; filter: blur(6px); user-select: none; }
-  .gate-teaser-hint { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.4); display: block; margin-top: 14px; }
-  .gate-input-wrap { display: flex; gap: 2px; margin-bottom: 10px; }
-  .gate-input { flex: 1; background: #F5F2EE; border: 1.5px solid #D9D4CE; color: #0a0a0a; font-family: 'Libre Baskerville', serif; font-size: 14px; padding: 14px 18px; outline: none; transition: border-color 0.2s; }
-  .gate-input:focus { border-color: #0a0a0a; }
-  .gate-input.err { border-color: #c00; }
-  .gate-input::placeholder { color: #ccc; }
-  .gate-note { font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: 1.5px; text-transform: uppercase; color: #bbb; display: block; }
-  .tier-flag { border-left: 3px solid #0a0a0a; padding: 12px 16px; background: #EDE9E3; margin-bottom: 20px; }
-  .tier-flag-label { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: #555; display: block; margin-bottom: 4px; }
-  .tier-flag-text { font-family: 'Libre Baskerville', serif; font-size: 13px; line-height: 1.6; color: #333; }
-  .safety-note { background: #EDE9E3; border: 1px solid #D9D4CE; padding: 20px 24px; margin-bottom: 40px; }
-  .safety-text { font-family: 'Libre Baskerville', serif; font-size: 13.5px; line-height: 1.8; color: #555; font-style: italic; }
+  .gate-teaser { background: rgba(237,233,227,0.04); border: 1px solid var(--rule); padding: 28px 32px; margin-bottom: 32px; }
+  .gate-teaser-label { font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--steel); display: block; margin-bottom: 10px; }
+  .gate-teaser-text { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: rgba(237,233,227,0.15); letter-spacing: 0.01em; line-height: 1; filter: blur(6px); user-select: none; }
+  .gate-teaser-hint { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--steel); display: block; margin-top: 14px; }
+  .gate-input-wrap { display: flex; gap: 2px; margin-bottom: 12px; }
+  .gate-input { flex: 1; background: rgba(237,233,227,0.04); border: 1px solid rgba(237,233,227,0.15); color: var(--fog); font-family: 'Libre Baskerville', serif; font-size: 14px; padding: 14px 18px; outline: none; transition: border-color 0.2s; }
+  .gate-input:focus { border-color: rgba(237,233,227,0.35); }
+  .gate-input.err { border-color: #c05050; }
+  .gate-input::placeholder { color: var(--steel); }
+  .gate-note { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--steel); display: block; }
+  .gate-note.err-note { color: #c05050; }
+
+  /* CALLOUT */
+  .callout-dark { background: rgba(237,233,227,0.04); border: 1px solid var(--rule); padding: 32px 36px; margin-bottom: 32px; }
+  .tier-flag { border-left: 2px solid var(--fog); padding: 16px 20px; background: rgba(237,233,227,0.04); margin-bottom: 24px; }
+  .tier-flag-label { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--fog); display: block; margin-bottom: 8px; }
+  .tier-flag-text { font-family: 'Libre Baskerville', serif; font-size: 14px; line-height: 1.7; color: var(--text-muted); }
+  .safety-note { background: rgba(237,233,227,0.04); border: 1px solid var(--rule); padding: 20px 24px; margin-bottom: 40px; }
+  .safety-text { font-family: 'Libre Baskerville', serif; font-size: 14px; line-height: 1.8; color: var(--text-muted); font-style: italic; }
+
+  /* NICHE TAGS */
+  .niche-tag { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.05em; border: 1px solid var(--rule); padding: 6px 12px; color: var(--text-muted); }
+
+  /* SPINNER */
+  .spin { display: inline-block; width: 28px; height: 28px; border: 2px solid var(--rule); border-top-color: var(--fog); animation: spin 0.8s linear infinite; }
+
+  /* ANIMATIONS */
   @keyframes spin { to { transform: rotate(360deg); } }
   @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
-  .fade-up { animation: fadeUp 0.4s ease forwards; }
+  .fade-up   { animation: fadeUp 0.4s ease forwards; }
   .fade-up-1 { animation: fadeUp 0.4s 0.05s ease both; }
-  .fade-up-2 { animation: fadeUp 0.4s 0.1s ease both; }
+  .fade-up-2 { animation: fadeUp 0.4s 0.10s ease both; }
   .fade-up-3 { animation: fadeUp 0.4s 0.15s ease both; }
-  .fade-up-4 { animation: fadeUp 0.4s 0.2s ease both; }
+  .fade-up-4 { animation: fadeUp 0.4s 0.20s ease both; }
+
+  /* RESPONSIVE */
   @media (max-width: 640px) {
-    .hdr { padding: 12px 20px; }
-    .main { padding: 40px 20px 60px; }
-    .ftr { padding: 14px 20px; flex-direction: column; gap: 6px; }
+    .hdr { padding: 0 20px; }
+    .main { padding: 40px 20px 72px; }
+    .ftr { padding: 16px 20px; flex-direction: column; gap: 6px; }
     .check-grid { grid-template-columns: 1fr; }
-    .meta-row { gap: 20px; }
+    .meta-row { gap: 24px; }
   }
 `;
 
@@ -301,7 +354,6 @@ function computeScores(ans) {
   return { raw:s, sorted, primary:sorted[0][0] };
 }
 
-// ─── BACKGROUND + MARKET ─────────────────────────────────────────────────────
 function getBackground(ans) {
   const eduMap = {"Business, Commerce, or Management":"A background in business","Communications, Journalism, or Marketing":"A background in communications","IT, Computer Science, or Engineering":"A technical background in IT","Education, Humanities, or Liberal Arts":"A background in education","Finance, Accounting, or Economics":"A background in finance","Real Estate, Law, or Property-related":"A background in real estate and law","Healthcare, Nursing, or Medical Sciences":"A background in healthcare","Not yet finished / currently studying":"An ongoing academic background","Other or unrelated field":"A cross-disciplinary background"};
   const expMap = {"Office admin, secretary, or executive support":"Years of admin and executive support experience","Retail, sales, or online selling":"Direct experience in sales and online retail","Social media, marketing, or advertising":"Hands-on experience in social media and marketing","Writing, editing, blogging, or journalism":"A writing and editorial background","Finance, accounting, or bookkeeping":"Direct experience in finance and bookkeeping","Customer service or call center (BPO)":"BPO and customer service experience","Real estate, property, or banking":"Direct experience in real estate and banking","Healthcare, clinic, or medical admin":"Clinical and medical admin experience","Legal, paralegal, or law firm work":"Paralegal and law firm experience","Teaching, tutoring, or training":"A background in teaching and instructional design","Tech, software, or IT support":"Direct experience in tech and IT operations","Sales, lead generation, or outreach":"Direct experience in sales and business development","Manual labor, trades, transport, or unrelated work":"A hands-on, results-driven professional background","Fresh graduate — no work experience yet":"An academic background now entering the professional world"};
@@ -318,7 +370,6 @@ function getMarket(ans) {
   return (opt && marketMap[opt]) ? marketMap[opt] : "international";
 }
 
-// ─── BEST TOOL ────────────────────────────────────────────────────────────────
 const NICHE_TOOL_PRIORITY = {
   ecom:["Shopify / Lazada / Shopee","Google Workspace","Mailchimp / ActiveCampaign","Notion / Trello / Asana"],
   social:["Canva or Adobe Photoshop","Facebook / Instagram / TikTok","Mailchimp / ActiveCampaign"],
@@ -337,6 +388,7 @@ const NICHE_TOOL_PRIORITY = {
   mktg:["Google Ads / Meta Ads Manager","SEMrush / Ahrefs / Ubersuggest","Mailchimp / ActiveCampaign","HubSpot / Salesforce / CRM"],
 };
 const TOOL_CLEAN = {"Shopify / Lazada / Shopee":"Shopify","Google Workspace":"Google Workspace","Mailchimp / ActiveCampaign":"email automation tools","Notion / Trello / Asana":"Notion","Canva or Adobe Photoshop":"Canva","Facebook / Instagram / TikTok":"social platforms","Zoom or Calendly":"Calendly","WordPress or Wix":"WordPress","ChatGPT or Gemini":"AI tools","HubSpot / Salesforce / CRM":"CRM tools","QuickBooks or Xero":"QuickBooks","Airtable or Monday.com":"Airtable","Zendesk / Freshdesk / Gorgias":"Gorgias","EMR or medical scheduling":"medical scheduling systems","Clio or MyCase":"Clio","Kajabi / Teachable / Thinkific":"Kajabi","Zapier / Make / n8n":"Zapier","LinkedIn":"LinkedIn","Google Ads / Meta Ads Manager":"Google Ads","SEMrush / Ahrefs / Ubersuggest":"SEMrush","Apollo / Hunter / Sales Navigator":"Apollo"};
+
 function getBestTool(ans, primary) {
   const selected = (ans.q04 || []).map(i => QS[3].opts[i]?.t).filter(Boolean);
   const priority = NICHE_TOOL_PRIORITY[primary] || [];
@@ -345,10 +397,10 @@ function getBestTool(ans, primary) {
   return fb[primary] || "industry-standard tools";
 }
 
-// ─── DELIVERABLES + BRAND STATEMENT ──────────────────────────────────────────
 const DELIVERABLES = { ecom:"Managing product listings, order workflows, and customer data",social:"Creating and scheduling content across platforms",exec:"Managing calendars, inboxes, and executive workflows",content:"Researching, writing, and publishing SEO-optimised content",realty:"Managing listings, leads, and transaction coordination",books:"Reconciling accounts, categorising transactions, and producing reports",cx:"Handling tickets, resolving escalations, and managing customer communications",health:"Coordinating patient scheduling, records, and administrative workflows",legal:"Managing case files, deadlines, and client correspondence",edu:"Building course infrastructure, managing enrolments, and coordinating student support",pm:"Tracking deliverables, coordinating teams, and maintaining project documentation",tech:"Setting up and maintaining automation systems, integrations, and digital workflows",ai_auto:"Deploying AI tools and automation workflows that replace manual, repetitive operations",sales:"Qualifying leads, managing pipelines, and supporting close processes for high-ticket offers",mktg:"Managing ad campaigns, tracking performance, and optimising digital marketing funnels" };
 const S1 = { ecom:(t,d)=>`${d} for eCommerce brands using ${t}, turning store operations into systems that convert browsers into repeat buyers.`,social:(t,d)=>`${d} for growing brands using ${t}, building content systems that drive consistent engagement without the chaos.`,exec:(t,d)=>`${d} for busy executives using ${t}, creating the operational clarity that lets founders focus on decisions that matter.`,content:(t,d)=>`${d} for online businesses using ${t}, producing content that ranks, converts, and positions clients as authorities in their space.`,realty:(t,d)=>`${d} for real estate teams using ${t}, keeping pipelines organised so agents spend more time closing and less time chasing leads.`,books:(t,d)=>`${d} for service-based businesses using ${t}, translating messy financial data into clean records that clients can actually act on.`,cx:(t,d)=>`${d} for online businesses using ${t}, resolving customer issues with the speed and consistency that builds long-term loyalty.`,health:(t,d)=>`${d} for healthcare providers using ${t}, keeping patient records and schedules running with zero room for administrative error.`,legal:(t,d)=>`${d} for law firms using ${t}, managing case files and client communications with the precision the legal industry demands.`,edu:(t,d)=>`${d} for course creators using ${t}, building the backend systems that keep students engaged and programmes running on schedule.`,pm:(t,d)=>`${d} for growing teams using ${t}, building the project infrastructure that keeps deliverables on track and stakeholders informed.`,tech:(t,d)=>`${d} for scaling businesses using ${t}, eliminating the manual bottlenecks that slow teams down and quietly cost them money.`,ai_auto:(t,d)=>`${d} for forward-thinking operators using ${t}, turning repetitive work into automated systems that run without constant supervision.`,sales:(t,d)=>`${d} for high-ticket businesses using ${t}, building the outreach infrastructure that keeps pipelines full and conversions predictable.`,mktg:(t,d)=>`${d} for growing brands using ${t}, running campaigns that track every peso and optimise toward results, not just reach.` };
 const S2 = { exec:(bg,m)=>`${bg} built the organisational discipline that ${m} clients pay a premium for in a VA who never needs to be managed.`,books:(bg,m)=>`${bg} provided the analytical foundation that ${m} business owners rely on when they need numbers they can trust.`,social:(bg,m)=>`${bg} developed the communication instincts that ${m} brands need to stay visible in feeds built to forget them.`,content:(bg,m)=>`${bg} sharpened the writing discipline that ${m} businesses need to consistently produce content that earns authority over time.`,realty:(bg,m)=>`${bg} developed the research precision that ${m} real estate teams depend on to stay ahead of a market that moves fast.`,cx:(bg,m)=>`${bg} built the people skills that ${m} businesses rely on to turn difficult interactions into five-star reviews.`,health:(bg,m)=>`${bg} provided the accuracy habits that ${m} healthcare providers need when every scheduling error has real consequences.`,legal:(bg,m)=>`${bg} built the attention to detail that ${m} law firms require when no document can afford to be wrong.`,edu:(bg,m)=>`${bg} developed the instructional instincts that ${m} course creators need to build programmes students actually complete.`,pm:(bg,m)=>`${bg} developed the process discipline that ${m} teams need to deliver complex projects without the chaos of missed handoffs.`,tech:(bg,m)=>`${bg} built the systems thinking that ${m} businesses need when they're ready to stop doing manually what software should be doing automatically.`,ai_auto:(bg,m)=>`${bg} developed the technical curiosity that ${m} operators need when AI tools are available but no one on their team knows how to deploy them properly.`,sales:(bg,m)=>`${bg} built the persuasion and follow-through discipline that ${m} sales teams need when inconsistent outreach is the only thing standing between them and their revenue target.`,mktg:(bg,m)=>`${bg} developed the analytical and creative balance that ${m} brands need to run campaigns that actually convert, not just campaigns that look good in reports.`,ecom:(bg,m)=>`${bg} built the systems thinking that ${m} eCommerce brands need to scale operations without losing control of quality.` };
+
 function generateBrandStatement(ans, primary) {
   const n1 = NICHES[primary]; const tool = getBestTool(ans,primary);
   const deliverable = DELIVERABLES[primary] || `Delivering specialist ${n1.label} services`;
@@ -356,7 +408,6 @@ function generateBrandStatement(ans, primary) {
   return `${(S1[primary]||S1.exec)(tool,deliverable)} ${(S2[primary]||S2.exec)(background,market)}`;
 }
 
-// ─── WHY THIS NICHE ───────────────────────────────────────────────────────────
 function buildReasons(ans, primary) {
   const n = NICHES[primary], r = [];
   const q03 = ans.q03!==undefined ? QS[2].opts[ans.q03]?.t : null;
@@ -374,11 +425,10 @@ function buildReasons(ans, primary) {
   return r.slice(0,3);
 }
 
-// ─── EMAIL GATE ───────────────────────────────────────────────────────────────
 const BLOCKED_DOMAINS = ["mailinator.com","guerrillamail.com","tempmail.com","throwam.com","temp-mail.org","yopmail.com","sharklasers.com","guerrillamailblock.com","grr.la","dispostable.com","trashmail.com","mailnull.com","10minutemail.com","fakeinbox.com","maildrop.cc"];
 function isValidEmail(e) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e) && !BLOCKED_DOMAINS.some(d => e.toLowerCase().endsWith("@"+d)); }
 
-// ─── MAIN COMPONENT ───────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────────────
 export default function NicheSelector() {
   const [phase, setPhase]   = useState("landing");
   const [qi, setQi]         = useState(0);
@@ -444,84 +494,73 @@ export default function NicheSelector() {
   const tierFlag = result ? TIER3_FLAGS[result.primary] : null;
 
   return (
-    <div style={{fontFamily:"'Libre Baskerville', Georgia, serif", background:"#F5F2EE", color:"#0a0a0a", minHeight:"100vh", display:"flex", flexDirection:"column"}}>
+    <div className="mm-wrap">
       <style>{CSS}</style>
 
       <header className="hdr">
-        <span className="brand">Margin &amp; Momentum™</span>
+        <a href="https://marginmomentum.co" className="brand">Margin &amp; Momentum™</a>
         <span className="hdr-right">VA Niche Diagnostic</span>
       </header>
 
-      {phase === "quiz" && <div className="prog"><div className="prog-fill" style={{width:`${pct}%`}} /></div>}
       {phase === "quiz" && (
-        <div style={{borderBottom:"1px solid #e8e8e8", padding:"8px 40px", display:"flex", justifyContent:"flex-end"}}>
-          <span style={{fontFamily:"'DM Mono',monospace", fontSize:9, letterSpacing:"2px", color:"#aaa"}}>
-            DIAGNOSTIC · {qi+1} / {TOTAL}
-          </span>
-        </div>
+        <>
+          <div className="prog"><div className="prog-fill" style={{width:`${pct}%`}} /></div>
+          <div style={{borderBottom:"1px solid var(--rule)", padding:"8px 48px", display:"flex", justifyContent:"flex-end", position:"relative", zIndex:1}}>
+            <span style={{fontFamily:"'DM Mono',monospace", fontSize:9, letterSpacing:"0.2em", textTransform:"uppercase", color:"var(--steel)"}}>
+              Diagnostic · {qi+1} / {TOTAL}
+            </span>
+          </div>
+        </>
       )}
 
-      {/* ── LANDING ── */}
+      {/* LANDING */}
       {phase === "landing" && (
         <main className="main">
-          <span className="eyebrow fade-up">VA Launch System 2.0 · Diagnostic Tool</span>
-          <h1 className="big-title fade-up-1">
-            Find Your<br/>
-            <span className="outline-text">Perfect</span><br/>
-            Niche.
-          </h1>
+          <div className="eyebrow fade-up">VA Launch System 2.0 · Diagnostic Tool</div>
+          <h1 className="big-title fade-up-1">Find Your<br/><span className="outline-text">Perfect</span><br/>Niche.</h1>
           <div className="divider fade-up-2" />
-          <p className="body-text fade-up-2">
-            12 questions. A specific niche match from 15 high-demand VA specialisations.
-            A personalised brand statement ready to paste into your resume and proposals.
-          </p>
+          <p className="body-text fade-up-2">12 questions. A specific niche match from 15 high-demand VA specialisations. A personalised brand statement ready to paste into your resume and proposals.</p>
           <div className="safety-note fade-up-2">
-            <p className="safety-text">
-              This diagnostic works for everyone — career shifters with 20 years of experience and fresh graduates with none.
-              Your background is the input. The system finds the strongest entry point available to you, wherever you are starting from.
-            </p>
+            <p className="safety-text">This diagnostic works for everyone — career shifters with 20 years of experience and fresh graduates with none. Your background is the input. The system finds the strongest entry point available to you, wherever you are starting from.</p>
           </div>
           <div className="meta-row fade-up-3">
             {[["15","Niches mapped"],["12","Questions"],["5 min","To complete"],["Free","Brand statement"]].map(([n,l]) => (
-              <div className="meta-item" key={l}>
-                <span className="meta-num">{n}</span>
-                <span className="meta-lbl">{l}</span>
-              </div>
+              <div className="meta-item" key={l}><span className="meta-num">{n}</span><span className="meta-lbl">{l}</span></div>
             ))}
           </div>
           <div className="fade-up-4">
             <button className="btn-primary" onClick={start}>Start the Diagnostic →</button>
           </div>
-          <div style={{marginTop:48,borderTop:"1px solid #ebebeb",paddingTop:32}}>
-            <span className="section-lbl">15 niches covered</span>
-            <div style={{display:"flex",flexWrap:"wrap",gap:8}}>
+          <div style={{marginTop:48, borderTop:"1px solid var(--rule)", paddingTop:32}}>
+            <span className="section-lbl" style={{marginBottom:16}}>15 niches covered</span>
+            <div style={{display:"flex", flexWrap:"wrap", gap:8}}>
               {Object.values(NICHES).map(n => (
-                <span key={n.label} style={{fontFamily:"'DM Mono',monospace",fontSize:10,letterSpacing:"0.5px",border:"1px solid #e0e0e0",padding:"5px 12px",color:"#555"}}>
-                  {n.icon} {n.label}
-                </span>
+                <span key={n.label} className="niche-tag">{n.icon} {n.label}</span>
               ))}
             </div>
           </div>
         </main>
       )}
 
-      {/* ── QUIZ ── */}
+      {/* QUIZ */}
       {phase === "quiz" && (
         <main className="main" key={aKey}>
-          <span className="eyebrow fade-up">{q.multi ? "Select all that apply" : `Question ${q.n} of ${TOTAL}`}</span>
+          <div className="eyebrow fade-up">{q.multi ? "Select all that apply" : `Question ${q.n} of ${TOTAL}`}</div>
           <h2 className="q-text fade-up-1">{q.text}</h2>
           <p className="q-sub fade-up-2">{q.sub}</p>
           {q.multi ? (
             <>
-              {(Array.isArray(sel) && sel.length > 0) && <span className="tools-note fade-up-2">{sel.length} tool{sel.length > 1 ? "s" : ""} selected — click to deselect</span>}
-              {!(Array.isArray(sel) && sel.length > 0) && <span className="tools-note fade-up-2">No tools yet? That's fine — skip ahead and we'll build from scratch.</span>}
+              {(Array.isArray(sel) && sel.length > 0)
+                ? <span className="tools-note fade-up-2">{sel.length} tool{sel.length > 1 ? "s" : ""} selected — click to deselect</span>
+                : <span className="tools-note fade-up-2">No tools yet? That's fine — skip ahead and we'll build from scratch.</span>
+              }
               <div className="check-grid fade-up-3">
                 {q.opts.map((opt, i) => (
                   <button key={i} className={`check-opt${isSelected(i) ? " sel" : ""}`} onClick={() => pick(i)}>
                     <span className="check-box">{isSelected(i) ? "✓" : ""}</span>
                     <span className="check-text">
                       {opt.t}
-                      {opt.sub && <span style={{display:"block",opacity:0.6,fontSize:9,marginTop:2}}>{opt.sub}</span>}
+                      {opt.sub && <span style={{display:"block", opacity:0.6, fontSize:9, marginTop:2}}>{opt.sub}</span>}
                     </span>
                   </button>
                 ))}
@@ -537,33 +576,33 @@ export default function NicheSelector() {
               ))}
             </div>
           )}
-          <div style={{display:"flex",gap:10,marginTop:4}} className="fade-up-4">
+          <div style={{display:"flex", gap:10, marginTop:4}} className="fade-up-4">
             <button className="btn-outline" onClick={back} style={{padding:"15px 24px"}}>← Back</button>
-            <button className="btn-primary" onClick={next} disabled={!canProceed} style={{flex:1,justifyContent:"center"}}>
+            <button className="btn-primary" onClick={next} disabled={!canProceed} style={{flex:1, justifyContent:"center"}}>
               {qi < TOTAL - 1 ? "Next →" : "See My Result →"}
             </button>
           </div>
-          {q.multi && <p style={{fontFamily:"'DM Mono',monospace",fontSize:9,color:"#ccc",letterSpacing:"1.5px",textAlign:"center",marginTop:14}}>Q{q.n} OF {TOTAL} · MULTI-SELECT</p>}
+          {q.multi && <p style={{fontFamily:"'DM Mono',monospace", fontSize:9, color:"var(--steel)", letterSpacing:"0.15em", textTransform:"uppercase", textAlign:"center", marginTop:14}}>Q{q.n} of {TOTAL} · Multi-Select</p>}
         </main>
       )}
 
-      {/* ── CALCULATING ── */}
+      {/* CALCULATING */}
       {phase === "calc" && (
-        <main className="main" style={{display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:24,minHeight:"60vh"}}>
+        <main className="main" style={{display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", gap:28, minHeight:"60vh"}}>
           <div className="spin" />
-          <div>
-            <div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:36,letterSpacing:"1px",color:"#0a0a0a",textAlign:"center",marginBottom:8}}>Analysing Your Profile</div>
-            <p style={{fontFamily:"'DM Mono',monospace",fontSize:10,letterSpacing:"2px",color:"#aaa",textAlign:"center"}}>MAPPING SKILLS ACROSS 15 VA NICHES</p>
+          <div style={{textAlign:"center"}}>
+            <div style={{fontFamily:"'Bebas Neue',sans-serif", fontSize:36, letterSpacing:"0.02em", color:"var(--fog)", marginBottom:8}}>Analysing Your Profile</div>
+            <p style={{fontFamily:"'DM Mono',monospace", fontSize:10, letterSpacing:"0.2em", textTransform:"uppercase", color:"var(--steel)"}}>Mapping skills across 15 VA niches</p>
           </div>
         </main>
       )}
 
-      {/* ── EMAIL GATE ── */}
+      {/* EMAIL GATE */}
       {phase === "gate" && result && pn && (
         <main className="main">
           <div className="gate-wrap">
-            <span className="eyebrow">Your result is ready.</span>
-            <h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(32px,6vw,56px)",lineHeight:0.95,color:"#0a0a0a",marginBottom:24}}>
+            <div className="eyebrow">Your result is ready.</div>
+            <h2 style={{fontFamily:"'Bebas Neue',sans-serif", fontSize:"clamp(40px,6vw,64px)", lineHeight:0.95, color:"var(--fog)", marginBottom:24, letterSpacing:"0.01em"}}>
               Enter your email<br/>to unlock it.
             </h2>
             <div className="gate-teaser">
@@ -582,22 +621,18 @@ export default function NicheSelector() {
               />
               <button className="btn-primary" onClick={submitEmail}>Unlock →</button>
             </div>
-            <span className="gate-note">
+            <span className={`gate-note${emailErr ? " err-note" : ""}`}>
               {emailErr ? "⚠ Please enter a valid email address." : "Your brand statement will be sent to this address."}
             </span>
           </div>
         </main>
       )}
 
-      {/* ── RESULTS ── */}
+      {/* RESULTS */}
       {phase === "results" && result && pn && (
         <main className="main">
-          <span className="eyebrow">Diagnostic Complete · Your Niche Match</span>
-          <h1 className="big-title">
-            You Are A<br/>
-            <span style={{whiteSpace:"nowrap"}}>{pn.icon} {pn.label.split(" ")[0]}</span>
-            {pn.label.split(" ").slice(1).map((w,i) => <span key={i}><br/>{w}</span>)}
-          </h1>
+          <div className="eyebrow">Diagnostic Complete · Your Niche Match</div>
+          <h1 className="big-title">You Are A<br/>{pn.icon} {pn.label}</h1>
           <div className="divider" />
           <p className="body-text">Based on your background, skills, and goals — here is your full breakdown across all 15 niches.</p>
 
@@ -608,21 +643,20 @@ export default function NicheSelector() {
             </div>
           )}
 
+          {/* PRIMARY RESULT */}
           <div className="blk-box">
-            <span style={{fontFamily:"'DM Mono',monospace",fontSize:9,letterSpacing:"3px",color:"rgba(255,255,255,0.4)",textTransform:"uppercase",display:"block",marginBottom:14}}>
-              Primary Recommendation · Niche Match
-            </span>
+            <span className="section-lbl" style={{marginBottom:14, color:"var(--steel)"}}>Primary Recommendation · Niche Match</span>
             <div className="result-niche">{pn.label}</div>
-            <div style={{display:"flex",gap:8,flexWrap:"wrap",marginBottom:16}}>
+            <div style={{display:"flex", gap:8, flexWrap:"wrap", marginBottom:16}}>
               <span className="pill">🇵🇭 {pn.php}</span>
               <span className="pill">💵 {pn.usd}</span>
               <span className="pill">{pn.demand} Demand</span>
             </div>
-            <p style={{fontFamily:"'DM Mono',monospace",fontSize:10,letterSpacing:"1px",color:"rgba(255,255,255,0.45)",marginBottom:20}}>
-              Mid-level target: <strong style={{color:"rgba(255,255,255,0.8)"}}>{pn.tier2}</strong>
+            <p style={{fontFamily:"'DM Mono',monospace", fontSize:10, letterSpacing:"0.08em", color:"var(--steel)", marginBottom:20}}>
+              Mid-level target: <strong style={{color:"var(--ink)"}}>{pn.tier2}</strong>
             </p>
-            <div style={{borderTop:"1px solid rgba(255,255,255,0.1)",paddingTop:20,marginBottom:20}}>
-              <span style={{fontFamily:"'DM Mono',monospace",fontSize:9,letterSpacing:"2.5px",color:"rgba(255,255,255,0.3)",textTransform:"uppercase",display:"block",marginBottom:14}}>Why This Niche Fits Your Profile</span>
+            <div style={{borderTop:"1px solid rgba(26,23,20,0.15)", paddingTop:20, marginBottom:20}}>
+              <span className="section-lbl" style={{marginBottom:14, color:"var(--steel)"}}>Why This Niche Fits Your Profile</span>
               {buildReasons(ans, result.primary).map((r,i) => (
                 <div className="reason-item" key={i}>
                   <span className="reason-mark">✓</span>
@@ -630,27 +664,29 @@ export default function NicheSelector() {
                 </div>
               ))}
             </div>
-            <div style={{display:"flex",gap:6,flexWrap:"wrap"}}>
+            <div style={{display:"flex", gap:6, flexWrap:"wrap"}}>
               {pn.tools.map(t => <span className="tool-tag" key={t}>{t}</span>)}
             </div>
           </div>
 
+          {/* BRAND STATEMENT */}
           <div className="brand-box">
             <span className="section-lbl" style={{marginBottom:16}}>✦ Your VA Brand Statement</span>
-            <p style={{fontFamily:"'DM Mono',monospace",fontSize:10,letterSpacing:"1px",color:"#aaa",marginBottom:16}}>
+            <p style={{fontFamily:"'DM Mono',monospace", fontSize:9, letterSpacing:"0.15em", textTransform:"uppercase", color:"var(--steel)", marginBottom:16}}>
               Paste directly into your resume, OnlineJobsPH profile, and proposals.
             </p>
             {brand && (
               <>
                 <div className="brand-quote">{brand}</div>
-                <button className="btn-primary" onClick={copy} style={{fontSize:9,padding:"12px 22px"}}>
+                <button className="btn-primary" onClick={copy} style={{fontSize:9, padding:"12px 22px"}}>
                   {copied ? "✓ Copied!" : "Copy Statement"}
                 </button>
               </>
             )}
           </div>
 
-          <div style={{marginBottom:40,paddingBottom:40,borderBottom:"1px solid #ebebeb"}}>
+          {/* SCORE BREAKDOWN */}
+          <div style={{marginBottom:40, paddingBottom:40, borderBottom:"1px solid var(--rule)"}}>
             <span className="section-lbl" style={{marginBottom:20}}>Full Compatibility Breakdown · All 15 Niches</span>
             {result.sorted.map(([id, sc]) => {
               const n = NICHES[id]; if (!n) return null;
@@ -667,8 +703,9 @@ export default function NicheSelector() {
             })}
           </div>
 
+          {/* NEXT 3 STEPS */}
           <div style={{marginBottom:40}}>
-            <h3 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:32,letterSpacing:"1px",color:"#0a0a0a",marginBottom:28}}>Your Next 3 Steps</h3>
+            <h3 style={{fontFamily:"'Bebas Neue',sans-serif", fontSize:40, letterSpacing:"0.01em", color:"var(--fog)", marginBottom:32}}>Your Next 3 Steps</h3>
             <div className="step-grid">
               {[
                 `Copy your brand statement and paste it into your resume's Professional Summary section. This is your opening line in every application you send.`,
@@ -676,20 +713,21 @@ export default function NicheSelector() {
                 `Run the <strong>30-Day Client Acquisition Sprint</strong> in Lab 07. Target: 5 applications per day. Consistency over quality in the first 30 days.`,
               ].map((txt, i) => (
                 <span key={i}>
-                  <span className="step-num" style={{display:"block",fontFamily:"'Bebas Neue',sans-serif",fontSize:28,color:"#0a0a0a",lineHeight:1}}>{String(i+1).padStart(2,"0")}</span>
-                  <div className="step-text" dangerouslySetInnerHTML={{__html: txt.replace(/<strong>/g,'<strong style="color:#0a0a0a">')}} />
+                  <span className="step-num">{String(i+1).padStart(2,"0")}</span>
+                  <div className="step-text" dangerouslySetInnerHTML={{__html: txt.replace(/<strong>/g,'<strong style="color:var(--fog)">') }} />
                 </span>
               ))}
             </div>
           </div>
 
+          {/* RATE TABLE */}
           <div style={{marginBottom:40}}>
-            <span className="section-lbl" style={{marginBottom:0}}>All 15 Niche Rate Ranges · 2026 Philippine VA Market</span>
-            <div style={{border:"1.5px solid #0a0a0a",overflow:"hidden",marginTop:16}}>
-              <div style={{background:"#0a0a0a",padding:"8px 12px",display:"flex",alignItems:"center",gap:10}}>
-                <span style={{fontFamily:"'DM Mono',monospace",fontSize:9,letterSpacing:"2px",color:"rgba(255,255,255,0.4)",flex:1}}>NICHE</span>
-                <span style={{fontFamily:"'DM Mono',monospace",fontSize:9,letterSpacing:"2px",color:"rgba(255,255,255,0.4)",width:160}}>PHILIPPINES</span>
-                <span style={{fontFamily:"'DM Mono',monospace",fontSize:9,letterSpacing:"2px",color:"rgba(255,255,255,0.4)",width:80}}>USD/HR</span>
+            <span className="section-lbl" style={{marginBottom:16}}>All 15 Niche Rate Ranges · 2026 Philippine VA Market</span>
+            <div style={{border:"1px solid var(--rule)", overflow:"hidden"}}>
+              <div style={{background:"var(--ink)", padding:"10px 14px", display:"flex", alignItems:"center", gap:10}}>
+                <span style={{fontFamily:"'DM Mono',monospace", fontSize:9, letterSpacing:"0.2em", textTransform:"uppercase", color:"var(--steel)", flex:1}}>Niche</span>
+                <span style={{fontFamily:"'DM Mono',monospace", fontSize:9, letterSpacing:"0.2em", textTransform:"uppercase", color:"var(--steel)", width:160}}>Philippines</span>
+                <span style={{fontFamily:"'DM Mono',monospace", fontSize:9, letterSpacing:"0.2em", textTransform:"uppercase", color:"var(--steel)", width:80}}>USD/hr</span>
               </div>
               {Object.entries(NICHES).map(([id, n]) => (
                 <div className={`rate-row${id===result.primary?" highlight":""}`} key={id}>
@@ -702,13 +740,14 @@ export default function NicheSelector() {
             </div>
           </div>
 
-          <div style={{background:"#0a0a0a",padding:"28px 32px",marginBottom:40}}>
-            <span style={{fontFamily:"'DM Mono',monospace",fontSize:9,letterSpacing:"3px",color:"rgba(255,255,255,0.4)",textTransform:"uppercase",display:"block",marginBottom:16}}>Ready to build?</span>
-            <p style={{fontFamily:"'Libre Baskerville',serif",fontSize:14,color:"rgba(255,255,255,0.8)",lineHeight:1.7,marginBottom:24}}>
+          {/* CTA */}
+          <div className="callout-dark" style={{marginBottom:40}}>
+            <span className="section-lbl" style={{marginBottom:16}}>Ready to build?</span>
+            <p style={{fontFamily:"'Libre Baskerville',serif", fontSize:15, color:"var(--text-on-dark)", lineHeight:1.75, marginBottom:24}}>
               The VA Launch System 2.0 is free. 7 labs. 15 niches.
-              Resume, portfolio, presence, proposals, and first-client sprint — all built for the <strong style={{color:"#fff"}}>{pn.label}</strong> niche.
+              Resume, portfolio, presence, proposals, and first-client sprint — all built for the <strong style={{color:"var(--fog)"}}>{pn.label}</strong> niche.
             </p>
-            <a href="https://app.marginmomentum.co" target="_blank" rel="noreferrer" style={{display:"inline-flex",alignItems:"center",gap:10,background:"#fff",color:"#0a0a0a",fontFamily:"'DM Mono',monospace",fontSize:10,fontWeight:500,letterSpacing:"2.5px",textTransform:"uppercase",padding:"16px 32px",textDecoration:"none"}}>
+            <a href="https://app.marginmomentum.co" target="_blank" rel="noreferrer" className="btn-primary">
               Access VLS 2.0 Free →
             </a>
           </div>
