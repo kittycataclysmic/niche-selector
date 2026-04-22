@@ -499,7 +499,10 @@ export default function NicheSelector() {
 
       <header className="hdr">
         <a href="https://marginmomentum.co" className="brand">Margin &amp; Momentum™</a>
-        <span className="hdr-right">VA Niche Diagnostic</span>
+        <div style={{display:"flex", alignItems:"center", gap:28}}>
+          <a href="https://systems.marginmomentum.co" style={{fontFamily:"'DM Mono',monospace", fontSize:10, letterSpacing:"0.2em", textTransform:"uppercase", color:"var(--steel)", textDecoration:"none", transition:"color 0.2s"}} onMouseEnter={e=>e.target.style.color="var(--fog)"} onMouseLeave={e=>e.target.style.color="var(--steel)"}>← VA Systems Library</a>
+          <span className="hdr-right">VA Niche Diagnostic</span>
+        </div>
       </header>
 
       {phase === "quiz" && (
@@ -755,6 +758,9 @@ export default function NicheSelector() {
           <button className="btn-outline" onClick={() => { setPhase("landing"); setResult(null); setBrand(""); setAns({}); setQi(0); setSel(null); setEmail(""); }}>
             ↺ Retake Diagnostic
           </button>
+          <a href="https://systems.marginmomentum.co" style={{display:"inline-flex", alignItems:"center", gap:10, fontFamily:"'DM Mono',monospace", fontSize:10, letterSpacing:"0.2em", textTransform:"uppercase", color:"var(--steel)", textDecoration:"none", marginLeft:16, transition:"color 0.2s"}} onMouseEnter={e=>e.target.style.color="var(--fog)"} onMouseLeave={e=>e.target.style.color="var(--steel)"}>
+            ← Back to VA Systems Library
+          </a>
         </main>
       )}
 
